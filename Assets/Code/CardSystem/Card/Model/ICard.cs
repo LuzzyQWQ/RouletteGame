@@ -30,27 +30,5 @@ namespace Argali.Game.CardSystem
 		public void UnselectCard();
 
 	}
-	/// <summary>
-	/// 卡牌抽象基类
-	/// </summary>
-	public abstract class CardBase : MonoBehaviour, ICard
-	{
-		protected string _cardGuid;
 
-
-		public CardBase(string cardId) 
-		{
-			_cardGuid = cardId;
-		}
-		public CardData GetCardData()
-		{
-			return CardConfigLoader.Instance.FindCardDataByID(_cardGuid);
-		}
-
-		public abstract void SelectCard();
-
-		public abstract void UnselectCard();
-
-		public abstract void UseCard(params object[] args);
-	}
 }

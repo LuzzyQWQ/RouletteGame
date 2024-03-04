@@ -9,12 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 530f8b5856eb5b347a50ad897c329b4f, type: 3}
-  m_Name: InitialCardDeckConfig
+  m_Script: {fileID: 11500000, guid: 94985c6baab18f748b98233b80e2b086, type: 3}
+  m_Name: CardMapConfig
   m_EditorClassIdentifier: 
   data:
-  - CardDeckName: base
-    CardsGUIDs:
-    - 
-    - 
-    - 
+  - index: 0
+    CardData:
+      CardName: little_move_card
+    CardClassName: MoveCard
+  - index: 0
+    CardData:
+      CardName: big_move_card
+    CardClassName: MoveCard

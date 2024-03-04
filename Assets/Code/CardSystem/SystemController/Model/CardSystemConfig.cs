@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Argali.Game.CardSystem
 {
+	[CreateAssetMenu(fileName = "Card System Config", menuName = "Card System/Card System Config",order = 0)]
 	/// <summary>
 	/// 卡牌系统初始配置
 	/// </summary>

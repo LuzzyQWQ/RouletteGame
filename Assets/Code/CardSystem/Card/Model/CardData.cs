@@ -11,7 +11,6 @@ namespace Argali.Game.CardSystem
 	[Serializable]
 	public class CardData 
 	{
-		public string Guid;
 		public string CardName;
 	}
 	[Serializable]
@@ -19,6 +18,6 @@ namespace Argali.Game.CardSystem
 	{
 		public int index;
 		public CardData CardData;
-		public CardBase CardClass;
+		public string CardClassName;
 	}
 }

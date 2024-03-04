@@ -20,7 +20,7 @@ namespace Argali.Game.CardSystem
 	{
 		#region 属性
 
-		public CardSystemState State;
+		private CardSystemState State;
 		/// <summary>
 		/// 用户卡组
 		/// </summary>

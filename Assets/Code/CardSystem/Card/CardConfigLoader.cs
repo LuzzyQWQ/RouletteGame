@@ -23,11 +23,11 @@ namespace Argali.Game.CardSystem
 		#region 属性
 
 		/// <summary>
-		/// 卡片映射
+		/// 卡片映射 名字 - 卡片信息
 		/// </summary>
 		public Dictionary<string, CardInfo> AllCardConfigMap;
 		/// <summary>
-		/// 初始卡组映射
+		/// 初始卡组映射 卡组名字 - 初始卡组信息
 		/// </summary>
 		public Dictionary<string, InitialCardDeckData> InitialCardDeckMap;
 		#endregion
@@ -62,7 +62,7 @@ namespace Argali.Game.CardSystem
 			{
 				foreach (var cardinfo in config.data)
 				{
-					AllCardConfigMap.Add(cardinfo.CardData.Guid,cardinfo);
+					AllCardConfigMap.Add(cardinfo.CardData.CardName,cardinfo);
 				}
 			}
 			else
@@ -76,31 +76,31 @@ namespace Argali.Game.CardSystem
 		/// <summary>
 		/// 通过卡片ID寻找卡片数据
 		/// </summary>
-		/// <param name="guid"></param>
+		/// <param name="cardName"></param>
 		/// <returns></returns>
-		public CardData FindCardDataByID(string guid)
+		public CardData FindCardDataByID(string cardName)
 		{
-			if (AllCardConfigMap.ContainsKey(guid))
+			if (AllCardConfigMap.ContainsKey(cardName))
 			{
-				return AllCardConfigMap[guid].CardData;
+				return AllCardConfigMap[cardName].CardData;
 			}
-			Debug.LogError("无法找到对应GUID的卡片数据" + guid);
+			Debug.LogError("无法找到对应GUID的卡片数据" + cardName);
 			return null;
 		}
 
 		/// <summary>
 		/// 生成卡片类
 		/// </summary>
-		/// <param name="guid"></param>
+		/// <param name="cardName"></param>
 		/// <returns></returns>
-		public ICard SpawnCard(string guid)
+		public ICard SpawnCard(string cardName)
 		{
-			if (AllCardConfigMap.ContainsKey(guid))
+			if (AllCardConfigMap.ContainsKey(cardName))
 			{
-				return Instantiate(AllCardConfigMap[guid].CardClass);
+				return CardFactory.CreateCard(AllCardConfigMap[cardName].CardClassName, cardName);
 			}else
 			{
-				Debug.LogError("无法找到对应GUID的卡片类" + guid.ToString());
+				Debug.LogError("无法找到对应GUID的卡片类" + cardName.ToString());
 				return null;
 			}
 		}

@@ -8,8 +8,6 @@ namespace Argali.Game.CardSystem
 	public class MoveCard : CardBase
 	{
 
-
-
 		public override void SelectCard()
 		{
 			Debug.Log("选择了卡片： " + typeof(MoveCard).ToString() + " " + this._cardName);

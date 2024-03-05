@@ -12,10 +12,10 @@ namespace Argali.Game.CardSystem
 	public class CardDeck
 	{
 		#region 属性
-		private List<ICard> _allCardsList;
-		private List<ICard> _drawCardsList;
-		private List<ICard> _usedCardsList;
-		private List<ICard> _handCards;
+		public  List<ICard> _allCardsList;
+		public  List<ICard> _drawCardsList;
+		public List<ICard> _usedCardsList;
+		public List<ICard> _handCards;
 
 
 		#endregion

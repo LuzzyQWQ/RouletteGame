@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Argali.Util.Reflection;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +17,8 @@ namespace Argali.Game.CardSystem
 		/// <returns></returns>
 		public static CardBase CreateCard(string className,string cardName)
 		{
-			Type type = Type.GetType(className);
+			//Type type = Type.GetType(className);
+			Type type = ReflectionUtility.GetTypeByName(className);
 			if (type == null)
 			{
 				Debug.LogError("未找到卡片类：" + className);

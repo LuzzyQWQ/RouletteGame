@@ -17,4 +17,8 @@ MonoBehaviour:
     CardsGUIDs:
     - little_move_card
     - little_move_card
+    - little_move_card
+    - little_move_card
+    - little_move_card
+    - big_move_card
     - big_move_card

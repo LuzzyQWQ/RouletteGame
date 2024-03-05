@@ -19,8 +19,6 @@ namespace Argali.Game.CardSystem
 	public class CardSystemController : Singleton<CardSystemController> 
 	{
 		#region 属性
-
-		private CardSystemState State;
 		/// <summary>
 		/// 用户卡组
 		/// </summary>
@@ -52,7 +50,6 @@ namespace Argali.Game.CardSystem
 		{
 			SystemInGameData = new CardSystemInGameData(config, seed);
 			SpawnCardDeck(deckName);
-			State = CardSystemState.NotInRound;
 		}
 		public void InitSystemWithDeck(string deckName, CardSystemConfig config)
 		{

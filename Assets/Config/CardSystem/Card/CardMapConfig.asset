@@ -17,7 +17,7 @@ MonoBehaviour:
     CardData:
       CardName: little_move_card
     CardClassName: MoveCard
-  - index: 0
+  - index: 1
     CardData:
       CardName: big_move_card
     CardClassName: MoveCard

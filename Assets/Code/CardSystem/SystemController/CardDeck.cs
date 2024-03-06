@@ -2,10 +2,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Argali.Game.CardSystem
 {
+
 	/// <summary>
 	/// 卡堆类
 	/// </summary>
@@ -17,15 +19,29 @@ namespace Argali.Game.CardSystem
 		public List<ICard> _usedCardsList;
 		public List<ICard> _handCards;
 
-
 		#endregion
 
-		#region 事件
+		#region Delegate
+
 		/// <summary>
-		/// 抽卡事件
+		/// 使用牌堆的数量变化事件
 		/// </summary>
-		public Action<ICard> OnDrawEvent;
-		public Action<ICard> OnDropEvent;
+		public event ValueChangeDelegated OnUsedCardsCountChange;
+		/// <summary>
+		/// 手牌数量变化事件
+		/// </summary>
+		public event ValueChangeDelegated OnHandCardsCountChange;
+		/// <summary>
+		/// 抽牌堆数量变化事件
+		/// </summary>
+		public event ValueChangeDelegated OnDrawCardsCountChange;
+		/// <summary>
+		/// 所拥有的卡组数量变化事件
+		/// </summary>
+		public event ValueChangeDelegated OnAllCardsCountChange;
+
+		public event CardChangeDelegated OnDrawCard;
+		public event CardChangeDelegated OnDropCard;
 		#endregion
 
 
@@ -64,7 +80,8 @@ namespace Argali.Game.CardSystem
 			ICard card = _drawCardsList[0];
 			_handCards.Add(card);
 			_drawCardsList.RemoveAt(0);
-			OnDrawEvent?.Invoke(card);
+			OnDrawCard?.Invoke(card);
+			OnHandCardsCountChange?.Invoke(_handCards.Count);
 			CheckDrawList();
 		}
 
@@ -76,7 +93,8 @@ namespace Argali.Game.CardSystem
 		{
 			_handCards.Remove(card);
 			_usedCardsList.Add(card);
-			OnDropEvent?.Invoke(card);
+			OnDropCard?.Invoke(card);
+			OnUsedCardsCountChange?.Invoke(_usedCardsList.Count);
 		}
 
 		/// <summary>
@@ -86,6 +104,7 @@ namespace Argali.Game.CardSystem
 		public void AddCardToDeck(ICard card)
 		{
 			_allCardsList.Add(card);
+			OnAllCardsCountChange?.Invoke(_allCardsList.Count);
 		}
 		/// <summary>
 		/// 从卡组销毁一张卡
@@ -94,6 +113,7 @@ namespace Argali.Game.CardSystem
 		public void RemoveCardFromDeck(ICard card)
 		{
 			_allCardsList.Remove(card);
+			OnAllCardsCountChange?.Invoke(_allCardsList.Count);
 		}
 		/// <summary>
 		/// 检查抽卡堆是否空
@@ -105,6 +125,8 @@ namespace Argali.Game.CardSystem
 				_drawCardsList = new List<ICard>(_usedCardsList);
 				_usedCardsList.Clear();
 				CardShuffle.ShuffleCards(ref _drawCardsList, 0);
+				OnDrawCardsCountChange?.Invoke(_drawCardsList.Count);
+				OnUsedCardsCountChange?.Invoke(_usedCardsList.Count);
 			}
 		}
 

@@ -6,7 +6,10 @@ using UnityEngine;
 
 namespace Argali.Game.CardSystem
 {
-
+	
+	/// <summary>
+	/// 卡片工厂，通过反射创建相应卡片类
+	/// </summary>
 	public class CardFactory
 	{
 		/// <summary>

@@ -20,7 +20,7 @@ namespace Argali.Game.CardSystem
 
 		public override void UseCard(params object[] args)
 		{
-			Debug.Log("使用前进卡片");
+			Debug.Log("使用前进卡片: " + GetCardName());
 		}
 	}
 

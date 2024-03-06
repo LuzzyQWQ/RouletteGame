@@ -20,12 +20,8 @@ namespace Argali.Game
 			CardSystemController.Instance.InitSystemWithDeck("base", new CardSystemConfig() { PreDefinedCardDeckName = "",MaxHandCount = 5,DropCount = 2});
 			CardSystemController.Instance.CreateRound();
 			CardSystemController.Instance.CurrentRoundController.StartRound();
-			var panel = PopPanelManager.Instance.OpenPopPanel<CardSystemPopPanel>();
-			panel.ClearDeckArea();
-			for (int i = 0; i < CardSystemController.Instance.UserCardDeck._handCards.Count; i++)
-			{
-				panel.SpawnCard(CardSystemController.Instance.UserCardDeck._handCards[i]);
-			}
+			var panel = PopPanelManager.Instance.OpenPopPanel<InRoundCardSystemPopPanel>();
+			panel.Init(CardSystemController.Instance.CurrentRoundController);
 		}
 	}
 

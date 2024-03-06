@@ -13,14 +13,17 @@ namespace Argali.Game.CardSystem
 	{
 		#region 属性
 		/// <summary>
-		/// 当前选择的卡片
-		/// </summary>
-		public ICard CurrentSelectedCard { get; private set; }
-		/// <summary>
 		/// 局内数据
 		/// </summary>
 		public CardSystemInRoundData InRoundData { get; private set; }
 		private CardDeck _userDeck => CardSystemController.Instance.UserCardDeck;
+		#endregion
+
+		#region Event
+		/// <summary>
+		/// 当前回合剩余丢弃次数变更
+		/// </summary>
+		public event ValueChangeDelegated OnRestDropCountChanged;
 		#endregion
 
 		#region 构造
@@ -41,6 +44,9 @@ namespace Argali.Game.CardSystem
 		{
 			// 初始化卡组
 			_userDeck.Init(CardSystemController.Instance.SystemInGameData.GetCurrentHashSeed());
+		}
+		public void DrawInitCards()
+		{
 			// 抽n张牌
 			int drawCount = CardSystemController.Instance.SystemInGameData.GetCurrentHandCount();
 			for (int i = 0; i < drawCount; i++)
@@ -58,26 +64,6 @@ namespace Argali.Game.CardSystem
 		}
 
 		/// <summary>
-		/// 选择卡牌
-		/// </summary>
-		/// <param name="card"></param>
-		public void SelectCard(ICard card)
-		{
-			if (card == CurrentSelectedCard)
-			{
-				card.UnselectCard();
-				CurrentSelectedCard = null;
-				return;
-			}
-			if (CurrentSelectedCard != null)
-			{
-				CurrentSelectedCard.UnselectCard();
-			}
-			card.SelectCard();
-			CurrentSelectedCard = card;
-		}
-
-		/// <summary>
 		/// 使用卡牌
 		/// </summary>
 		/// <param name="card"></param>
@@ -88,12 +74,13 @@ namespace Argali.Game.CardSystem
 		}
 
 		/// <summary>
-		/// 弃置卡牌
+		/// 弃置卡牌,并抽取一张新的放入手牌
 		/// </summary>
 		/// <param name="card"></param>
 		public void DropCard(ICard card)
 		{
 			InRoundData.UseDropCount();
+			OnRestDropCountChanged?.Invoke(InRoundData.RestDropCount);
 			_userDeck.Drop(card);
 			_userDeck.Draw();
 		}

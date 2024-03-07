@@ -81,6 +81,7 @@ namespace Argali.Game.CardSystem
 			_handCards.Add(card);
 			_drawCardsList.RemoveAt(0);
 			OnDrawCard?.Invoke(card);
+			OnDrawCardsCountChange?.Invoke(_drawCardsList.Count);
 			OnHandCardsCountChange?.Invoke(_handCards.Count);
 			CheckDrawList();
 		}

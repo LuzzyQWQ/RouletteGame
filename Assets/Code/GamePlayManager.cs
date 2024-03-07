@@ -18,7 +18,14 @@ namespace Argali.Game
 		{
 			// 初始化卡片系统
 			CardSystemController.Instance.InitSystemWithDeck("base", new CardSystemConfig() { PreDefinedCardDeckName = "",MaxHandCount = 5,DropCount = 2});
-			CardSystemController.Instance.CreateRound();
+			CardSystemController.Instance.CreateRound(PopRoundPanelAndStart);
+
+		}
+		/// <summary>
+		/// 弹出回合游戏界面， 开始游戏
+		/// </summary>
+		private void PopRoundPanelAndStart()
+		{
 			CardSystemController.Instance.CurrentRoundController.StartRound();
 			var panel = PopPanelManager.Instance.OpenPopPanel<InRoundCardSystemPopPanel>();
 			panel.Init(CardSystemController.Instance.CurrentRoundController);

@@ -3774,7 +3774,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2105591948}
-  - component: {fileID: 2105591949}
   m_Layer: 5
   m_Name: HandCardArea
   m_TagString: Untagged
@@ -3802,19 +3801,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -800, y: 400}
   m_Pivot: {x: 0.5, y: 0}
---- !u!114 &2105591949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2105591947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8e30b77e4136e04881c07dfa06bef58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cardItemPrefab: {fileID: 6036340921789154630, guid: ba4ff94fbdf510846abaa0e03479e99c, type: 3}
 --- !u!1 &2139085403
 GameObject:
   m_ObjectHideFlags: 0

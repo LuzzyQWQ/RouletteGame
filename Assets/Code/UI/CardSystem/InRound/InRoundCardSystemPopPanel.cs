@@ -19,7 +19,7 @@ namespace Argali.Game.CardSystem.UI
 				Debug.LogError("初始化卡牌战斗UI失败");
 				return;
 			}
-			CardDeckArea.Init(CardSystemController.Instance.UserCardDeck,CardSystemController.Instance.CurrentRoundController.DrawInitCards);
+			CardDeckArea.Init(CardSystemController.Instance.CurrentRoundController.DrawInitCards);
 		}
 
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Argali.Game.CardSystem.UI
@@ -10,16 +11,25 @@ namespace Argali.Game.CardSystem.UI
 	public class InRoundCardDeckArea: MonoBehaviour
 	{
 		#region Element
-		public InRoundHandCardArea HandCardArea {  get; private set; }
 		private InRoundCardDeckInfoArea _infoArea;
-		#endregion
+
+		private RectTransform _handCardContainer;
 		
-		public void Init(CardDeck cardDeck,System.Action finishCallBack=null)
+		/// <summary>
+		/// 卡片Item生成器
+		/// </summary>
+		public InRoundCardItemSpawner CardItemSpawner { get; private set; }
+		#endregion
+
+		/// <summary>
+		/// 初始化
+		/// </summary>
+		/// <param name="finishCallBack"></param>
+		public void Init(System.Action finishCallBack=null)
 		{
-			HandCardArea.Init();
+			CardSystemController.Instance.CurrentRoundController.CardItemSpawner.SetContainer(_handCardContainer);
 			finishCallBack?.Invoke();
 		}
-
 
 
 		private void Awake()
@@ -28,8 +38,8 @@ namespace Argali.Game.CardSystem.UI
 		}
 		private void InitElement()
 		{
-			HandCardArea = transform.Find("HandCardArea").GetComponent<InRoundHandCardArea>();
 			_infoArea = transform.Find("CardDeckInfoPart").GetComponent<InRoundCardDeckInfoArea>();
+			_handCardContainer = transform.Find("HandCardArea/Container").GetComponent<RectTransform>();
 		}
 	}
 

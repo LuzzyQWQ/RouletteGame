@@ -16,7 +16,7 @@ namespace Argali.Game.CardSystem.UI
 		private Image _bg;
 		private TMP_Text _cardNameText;
 		private Button _selectButton;
-		private InRoundHandCardArea _handCardArea;
+		private InRoundCardItemController _cardItemController;
 
 		// 选择后展开区域
 		private GameObject _selectedArea;
@@ -41,6 +41,7 @@ namespace Argali.Game.CardSystem.UI
 			Card = card;
 			_cardNameText.text = card.GetCardName();
 			_selectedArea.SetActive(false);
+			OnDropCountChange(CardSystemController.Instance.CurrentRoundController.InRoundData.RestDropCount);
 		}
 
 		#region  卡片事件委托
@@ -80,7 +81,7 @@ namespace Argali.Game.CardSystem.UI
 		{
 			if (item == this)
 			{
-				CardSystemController.Instance.CurrentRoundController.DropCard(Card);
+				CardSystemController.Instance.CurrentRoundController.DropAndDrawCard(Card);
 				Destroy(gameObject);
 			}
 		}
@@ -88,6 +89,10 @@ namespace Argali.Game.CardSystem.UI
 		{
 			// TODO
 			// 悬浮时显示卡片信息
+		}
+		private void OnDropCountChange(int count)
+		{
+			_dropButton.interactable = count > 0;
 		}
 		#endregion
 
@@ -103,26 +108,27 @@ namespace Argali.Game.CardSystem.UI
 		}
 		private void Start()
 		{
-			var handCardArea = PopPanelManager.Instance.GetPopPanel<InRoundCardSystemPopPanel>().CardDeckArea.HandCardArea;
-			_handCardArea.OnHoverCard += OnHover;
-			_handCardArea.OnSelectCard += OnSelect;
-			_handCardArea.OnUseCard += OnUse;
-			_handCardArea.OnDropCard += OnDrop;
+			_cardItemController.OnHoverCardItem += OnHover;
+			_cardItemController.OnSelectCardItem += OnSelect;
+			_cardItemController.OnUseCardItem += OnUse;
+			_cardItemController.OnDropCardItem += OnDrop;
+			CardSystemController.Instance.CurrentRoundController.OnRestDropCountChanged += OnDropCountChange;
 		}
 		private void OnDisable()
 		{
-			_handCardArea.OnHoverCard -= OnHover;
-			_handCardArea.OnSelectCard -= OnSelect;
-			_handCardArea.OnUseCard -= OnUse;
-			_handCardArea.OnDropCard -= OnDrop;
+			_cardItemController.OnHoverCardItem -= OnHover;
+			_cardItemController.OnSelectCardItem -= OnSelect;
+			_cardItemController.OnUseCardItem -= OnUse;
+			_cardItemController.OnDropCardItem -= OnDrop;
+			CardSystemController.Instance.CurrentRoundController.OnRestDropCountChanged -= OnDropCountChange;
 		}
 		private void InitElement()
 		{
-			_handCardArea = PopPanelManager.Instance.GetPopPanel<InRoundCardSystemPopPanel>().CardDeckArea.HandCardArea;
+			_cardItemController = CardSystemController.Instance.CurrentRoundController.CardItemController;
 			_bg = transform.Find("CardBG").GetComponent<Image>();
 			_cardNameText = transform.Find("CardNameText").GetComponent<TMP_Text>();
 			_selectButton = transform.Find("SelectButton").GetComponent<Button>();
-			_selectButton.onClick.AddListener(() => { _handCardArea.SelectCard(this); });
+			_selectButton.onClick.AddListener(() => { _cardItemController.SelectCard(this); });
 
 			// 选择扩展区域
 			_selectedArea = transform.Find("SelectedArea").gameObject;
@@ -137,7 +143,7 @@ namespace Argali.Game.CardSystem.UI
 		
 		private void OnDropButtonClick()
 		{
-			_handCardArea.DropCard();
+			_cardItemController.DropCard();
 		}
 		private void OnTryUseButtonClick()
 		{

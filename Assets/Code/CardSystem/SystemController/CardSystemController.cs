@@ -69,10 +69,10 @@ namespace Argali.Game.CardSystem
 		/// 创建回合控制器
 		/// 需要初始化牌组
 		/// </summary>
-		public void CreateRound()
+		public void CreateRound(System.Action onFinish)
 		{
 			SystemInGameData.RoundCount++;
-			CurrentRoundController = new CardSystemRoundController();
+			CurrentRoundController = new CardSystemRoundController(onFinish);
 		}
 		/// <summary>
 		/// 加载回合控制器

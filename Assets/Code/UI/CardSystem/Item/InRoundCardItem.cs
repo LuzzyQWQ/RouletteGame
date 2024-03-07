@@ -17,6 +17,11 @@ namespace Argali.Game.CardSystem.UI
 		private TMP_Text _cardNameText;
 		private Button _selectButton;
 		private InRoundHandCardArea _handCardArea;
+
+		// 选择后展开区域
+		private GameObject _selectedArea;
+		private Button _dropButton;
+		private Button _tryUseButton;
 		#endregion
 
 		#region Property
@@ -26,12 +31,19 @@ namespace Argali.Game.CardSystem.UI
 		private CardBase Card;
 
 		#endregion
-
+		
+		/// <summary>
+		/// 生成初始化
+		/// </summary>
+		/// <param name="card"></param>
 		public void InitCardItem(CardBase card)
 		{
 			Card = card;
 			_cardNameText.text = card.GetCardName();
+			_selectedArea.SetActive(false);
 		}
+
+		#region  卡片事件委托
 		private void OnSelect(InRoundCardItem lastItem, InRoundCardItem currentItem)
 		{
 			if (lastItem != this)
@@ -41,6 +53,7 @@ namespace Argali.Game.CardSystem.UI
 					// 选择此卡片事件
 					// TODO
 					ChangeBGColor(true);
+					_selectedArea.SetActive(true);
 					Card.SelectCard();
 				}
 			}
@@ -49,11 +62,12 @@ namespace Argali.Game.CardSystem.UI
 				// 取消选择该卡片事件
 				// TODO
 				ChangeBGColor(false);
+				_selectedArea.SetActive(false);
 				Card.UnselectCard();
 			}
 		}
 
-		private	 void OnUse(InRoundCardItem item, params object[] args)
+		private	void OnUse(InRoundCardItem item, params object[] args)
 		{
 			if(item == this) 
 			{
@@ -70,16 +84,19 @@ namespace Argali.Game.CardSystem.UI
 				Destroy(gameObject);
 			}
 		}
-
-		public void OnHover(InRoundCardItem cardItem)
+		private void OnHover(InRoundCardItem cardItem)
 		{
 			// TODO
 			// 悬浮时显示卡片信息
 		}
+		#endregion
+
 		private void ChangeBGColor(bool selected)
 		{
 			_bg.color = selected ? Color.blue : Color.white;
 		}
+		
+
 		private void Awake()
 		{
 			InitElement();
@@ -106,8 +123,32 @@ namespace Argali.Game.CardSystem.UI
 			_cardNameText = transform.Find("CardNameText").GetComponent<TMP_Text>();
 			_selectButton = transform.Find("SelectButton").GetComponent<Button>();
 			_selectButton.onClick.AddListener(() => { _handCardArea.SelectCard(this); });
+
+			// 选择扩展区域
+			_selectedArea = transform.Find("SelectedArea").gameObject;
+			_dropButton = _selectedArea.transform.Find("DropButton").GetComponent<Button>();
+			_tryUseButton = _selectedArea.transform.Find("TryUseButton").GetComponent<Button>();
+
+			_dropButton.onClick.AddListener(OnDropButtonClick);
+			_tryUseButton.onClick.AddListener(OnTryUseButtonClick);
 		}
 
+		#region 按钮事件
+		
+		private void OnDropButtonClick()
+		{
+			_handCardArea.DropCard();
+		}
+		private void OnTryUseButtonClick()
+		{
+			if (Card == null)
+			{
+				Debug.LogError("卡片数据为空");
+				return;
+			}
+			Card.ShowArgsPanel();
+		}
+		#endregion
 	}
 
 }

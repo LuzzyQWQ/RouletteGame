@@ -7,7 +7,7 @@ namespace Argali.Game.CardSystem
 	/// 卡牌抽象基类
 	/// </summary>
 
-	public abstract class CardBase : MonoBehaviour, ICard
+	public abstract class CardBase : ICard
 	{
 		protected string _cardName;
 
@@ -31,5 +31,10 @@ namespace Argali.Game.CardSystem
 		public abstract void UnselectCard();
 
 		public abstract void UseCard(params object[] args);
+		
+		/// <summary>
+		/// 展示参数界面
+		/// </summary>
+		public abstract void ShowArgsPanel();
 	}
 }

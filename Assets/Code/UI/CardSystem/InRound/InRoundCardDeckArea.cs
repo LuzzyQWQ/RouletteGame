@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Argali.Game.CardSystem.UI
 {
@@ -14,11 +15,11 @@ namespace Argali.Game.CardSystem.UI
 		private InRoundCardDeckInfoArea _infoArea;
 
 		private RectTransform _handCardContainer;
-		
+
 		/// <summary>
-		/// 卡片Item生成器
+		/// 结束回合，开始结算按钮
 		/// </summary>
-		public InRoundCardItemSpawner CardItemSpawner { get; private set; }
+		private Button _finishRoundButton;
 		#endregion
 
 		/// <summary>
@@ -40,6 +41,12 @@ namespace Argali.Game.CardSystem.UI
 		{
 			_infoArea = transform.Find("CardDeckInfoPart").GetComponent<InRoundCardDeckInfoArea>();
 			_handCardContainer = transform.Find("HandCardArea/Container").GetComponent<RectTransform>();
+
+			_finishRoundButton = transform.Find("ButtonArea/FinishRoundButton").GetComponent<Button>();
+			_finishRoundButton.onClick.AddListener(() =>
+			{
+				CardSystemController.Instance.CurrentRoundController.EndRound();
+			});
 		}
 	}
 

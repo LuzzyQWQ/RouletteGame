@@ -49,7 +49,7 @@ namespace Argali.Game.CardSystem.UI
 			}
 			for (int i = 0; i < _handCardContainer.childCount; i++)
 			{
-				GameObject.Destroy(_handCardContainer.GetChild(i));
+				GameObject.Destroy(_handCardContainer.GetChild(i).gameObject);
 			}
 		}
 		/// <summary>
@@ -86,38 +86,6 @@ namespace Argali.Game.CardSystem.UI
 			CardSystemController.Instance.UserCardDeck.OnDrawCard -= SpawnCard;
 			Addressables.Release(_cardItemHandle);
 		}
-		//private void Awake()
-		//{
-		//	_cardItemHandle = Addressables.LoadAssetAsync<GameObject>("InRoundCardItem");
-		//	_cardItemHandle.Completed += LoadComplete;
-		//}
-
-		//private void OnEnable()
-		//{
-		//	if (CardSystemController.Instance != null)
-		//	{
-		//		if (CardSystemController.Instance.UserCardDeck != null)
-		//		{
-		//			CardSystemController.Instance.UserCardDeck.OnDrawCard += SpawnCard;
-		//		}
-		//	}
-		//}
-
-
-		//private void OnDisable()
-		//{
-		//	if (CardSystemController.Instance != null)
-		//	{
-		//		if (CardSystemController.Instance.UserCardDeck != null)
-		//		{
-		//			CardSystemController.Instance.UserCardDeck.OnDrawCard -= SpawnCard;
-		//		}
-		//	}
-		//}
-		//private void OnDestroy()
-		//{
-		//	Addressables.Release(_cardItemHandle);
-		//}
 	}
 
 }

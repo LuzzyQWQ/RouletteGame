@@ -1,4 +1,5 @@
 ﻿using Argali.Game.CardSystem.UI;
+using Argali.UI.Pop;
 using MEC;
 using System.Collections;
 using System.Collections.Generic;
@@ -69,23 +70,27 @@ namespace Argali.Game.CardSystem
 		/// </summary>
 		public void StartRound()
 		{
-			
 			// 初始化卡组
 			_userDeck.Init(CardSystemController.Instance.SystemInGameData.GetCurrentHashSeed());
+
 		}
+
+
+
 		/// <summary>
 		/// 结束回合
-		/// 开始结算
 		/// </summary>
 		public void EndRound()
 		{
 			// 清除资源引用
 			CardItemSpawner.Destroy();
-			// 结算逻辑
-			// TODO
+			// 暂时回到首页
+			PopPanelManager.Instance.ClosePopPanel<InRoundCardSystemPopPanel>();
 		}
-
-
+		
+		/// <summary>
+		/// 抽取初始的卡组
+		/// </summary>
 		public void DrawInitCards()
 		{
 			// 抽n张牌

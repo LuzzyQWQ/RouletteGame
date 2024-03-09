@@ -35,6 +35,10 @@ namespace Argali.Game.CardSystem
 		public CardSystemRoundController CurrentRoundController { get; private set; }
 		#endregion
 
+
+		#region 方法
+
+		#region 初始化方法
 		/// <summary>
 		/// 初始化系统
 		/// </summary>
@@ -49,22 +53,18 @@ namespace Argali.Game.CardSystem
 		public void InitSystemWithDeck(string deckName, CardSystemConfig config, string seed)
 		{
 			SystemInGameData = new CardSystemInGameData(config, seed);
-			SpawnCardDeck(deckName);
+			// 生成用户卡组
+			UserCardDeck = new CardDeck(CardConfigLoader.Instance.GetInitialDeckCards(deckName));
 		}
 		public void InitSystemWithDeck(string deckName, CardSystemConfig config)
 		{
 			InitSystemWithDeck(deckName,config, DateTime.UtcNow.ToString());
 		}
 
+		#endregion
 
-		/// <summary>
-		/// 生成用户卡组，仅在游戏开始时生成
-		/// </summary>
-		private void SpawnCardDeck(string name) { 
-			// 使用预设的初始卡组
-			UserCardDeck = new CardDeck(CardConfigLoader.Instance.GetInitialDeckCards(name));
-		}
 
+		#region 回合相关方法
 		/// <summary>
 		/// 创建回合控制器
 		/// 需要初始化牌组
@@ -89,7 +89,9 @@ namespace Argali.Game.CardSystem
 		{
 
 		}
+#endregion
 
+		#endregion
 	}
 
 }

@@ -31,33 +31,6 @@ MonoBehaviour:
     assemblyNames:
     - Assembly-CSharp-firstpass
     - Assembly-CSharp
-    - Coffee.SoftMaskForUGUI
-    - ACTk.Examples.Runtime
-    - Ibuprogames.VideoGlitchesAsset
-    - ScreenSpaceReflections
-    - ACTk.Runtime
-    - ThinkingSDK
-    - MK.Glow
-    - ThinkingAnalytics
-    - IngameDebugConsole.Runtime
-    - MaxSdk.Scripts
-    - ACTk.Examples.Genuine.Runtime
-    - Coffee.UIParticle
-    - Purchasing.Common
-    - Sirenix.OdinInspector.CompatibilityLayer
-    - CodeStage.Maintainer.Editor
-    - ACTk.Editor
-    - MaxSdk.Scripts.IntegrationManager.Editor
-    - MK.Glow.Editor
-    - MK.Glow.URP.Editor
-    - PPv2URPConverters
-    - IngameDebugConsole.Editor
-    - MaxSdk.Scripts.Editor
-    - Sirenix.OdinInspector.CompatibilityLayer.Editor
-    - Coffee.UIParticle.Editor
-    - Coffee.SoftMaskForUGUI.Editor
-    - Sirenix.OdinInspector.Modules.UnityMathematics
-    - ACTk.Examples.Genuine.Editor
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1

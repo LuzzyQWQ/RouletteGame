@@ -11,19 +11,25 @@ namespace Argali.Game.RouletteSystem
 	{
 
 		#region Element
-		protected SlotItemTriggerType _triggerType;
+		/// <summary>
+		/// 插槽物品名字
+		/// </summary>
+		protected string _slotItemName;
+
 		protected bool _active;
 		protected ISlot _locateSlot;
 		#endregion
-		public SlotItemBase()
+		public SlotItemBase(string slotItemName)
 		{
+			_slotItemName = slotItemName;
 			_active = true;
+			_locateSlot = null;
 		}
 
 
-		public SlotItemTriggerType GetTriggerType()
+		public SlotItemData GetSlotItemData()
 		{
-			return _triggerType;
+			return SlotItemConfigLoader.Instance.GetSlotItemData(_slotItemName);
 		}
 		public bool IsAvailable() { return _active; }
 		public void Activate(bool active) {  _active = active; }

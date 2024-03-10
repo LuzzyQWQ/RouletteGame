@@ -25,11 +25,11 @@ namespace Argali.Game.CardSystem
 		/// <summary>
 		/// 卡片映射 名字 - 卡片信息
 		/// </summary>
-		public Dictionary<string, CardInfo> AllCardConfigMap;
+		private Dictionary<string, CardInfo> _allCardConfigMap;
 		/// <summary>
 		/// 初始卡组映射 卡组名字 - 初始卡组信息
 		/// </summary>
-		public Dictionary<string, InitialCardDeckData> InitialCardDeckMap;
+		private Dictionary<string, InitialCardDeckData> _initialCardDeckMap;
 		#endregion
 
 		#region 载入
@@ -39,50 +39,70 @@ namespace Argali.Game.CardSystem
 		/// <param name="config"></param>
 		private void LoadInitialCardDeckConfig(InitialCardDeckConfig config)
 		{
-			InitialCardDeckMap = new Dictionary<string, InitialCardDeckData>();
-			if(config != null)
+			_initialCardDeckMap = new Dictionary<string, InitialCardDeckData>();
+			if (config == null)
 			{
-				foreach (var cardDeckData in config.data)
-				{
-					InitialCardDeckMap.Add(cardDeckData.CardDeckName,cardDeckData);
-				}
+				Debug.LogError("初始卡组配置表 为空");
+				return;
 			}
-			else
+			foreach (var cardDeckData in config.data)
 			{
-				Debug.LogError("初始卡组配置为空");
+				if(_initialCardDeckMap.ContainsKey(cardDeckData.CardDeckName))
+				{
+					Debug.LogError("卡组配置存在相同的卡组名称 "+ cardDeckData.CardDeckName);
+					continue;
+				}
+				_initialCardDeckMap.Add(cardDeckData.CardDeckName, cardDeckData);
 			}
 		}
 		/// <summary>
-		/// 载入配置
+		/// 载入卡片配置
 		/// </summary>
 		private void LoadCardMapConfig(CardMapConfig config)
 		{
-			AllCardConfigMap = new Dictionary<string, CardInfo>();
-			if(config != null)
+			_allCardConfigMap = new Dictionary<string, CardInfo>();
+			if (config == null)
 			{
-				foreach (var cardinfo in config.data)
-				{
-					AllCardConfigMap.Add(cardinfo.CardData.CardName,cardinfo);
-				}
+				Debug.LogError("卡片配置表 为空");
+				return;
 			}
-			else
+			foreach (var cardinfo in config.data)
 			{
-				Debug.LogError("卡片配置为空");
+				if (_allCardConfigMap.ContainsKey(cardinfo.CardData.CardName))
+				{
+					Debug.LogError("卡组配置存在相同的卡组名称 " + cardinfo.CardData.CardName);
+					continue;
+				}
+				_allCardConfigMap.Add(cardinfo.CardData.CardName, cardinfo);
 			}
 		}
 		#endregion
 
-		#region 请求
+		#region 访问
+		/// <summary>
+		/// 获得所有卡片的信息
+		/// </summary>
+		/// <returns></returns>
+		public List<CardInfo> GetAllCardsInfo() 
+		{
+			List<CardInfo> cards = new List<CardInfo>();
+			foreach (var info in _allCardConfigMap.Values)
+			{
+				cards.Add(info);
+			}
+			return cards;
+		}
+
 		/// <summary>
 		/// 通过卡片ID寻找卡片数据
 		/// </summary>
 		/// <param name="cardName"></param>
 		/// <returns></returns>
-		public CardData FindCardDataByID(string cardName)
+		public CardData FindCardDataByName(string cardName)
 		{
-			if (AllCardConfigMap.ContainsKey(cardName))
+			if (_allCardConfigMap.ContainsKey(cardName))
 			{
-				return AllCardConfigMap[cardName].CardData;
+				return _allCardConfigMap[cardName].CardData;
 			}
 			Debug.LogError("无法找到对应GUID的卡片数据" + cardName);
 			return null;
@@ -95,10 +115,11 @@ namespace Argali.Game.CardSystem
 		/// <returns></returns>
 		public ICard SpawnCard(string cardName)
 		{
-			if (AllCardConfigMap.ContainsKey(cardName))
+			if (_allCardConfigMap.ContainsKey(cardName))
 			{
-				return CardFactory.CreateCard(AllCardConfigMap[cardName].CardClassName, cardName);
-			}else
+				return CardFactory.CreateCard(_allCardConfigMap[cardName].CardClassName, cardName);
+			}
+			else
 			{
 				Debug.LogError("无法找到对应GUID的卡片类" + cardName.ToString());
 				return null;
@@ -111,15 +132,28 @@ namespace Argali.Game.CardSystem
 		/// <returns></returns>
 		public List<ICard> GetInitialDeckCards(string deckName)
 		{
-			if (!InitialCardDeckMap.ContainsKey(deckName))
+			if (!_initialCardDeckMap.ContainsKey(deckName))
 			{
 				Debug.LogError("没有对应的卡组预设 " + deckName);
 				return null;
 			}
 			List<ICard> ans = new List<ICard>();
-			foreach (var cardGuid in InitialCardDeckMap[deckName].CardsGUIDs)
+			foreach (var cardGuid in _initialCardDeckMap[deckName].CardsGUIDs)
 			{
 				ans.Add(SpawnCard(cardGuid));
+			}
+			return ans;
+		}
+		/// <summary>
+		/// 获得所有初试卡组信息
+		/// </summary>
+		/// <returns></returns>
+		public List<InitialCardDeckData> GetAllInitialCardDeckDatas()
+		{
+			List<InitialCardDeckData> ans = new List<InitialCardDeckData>();
+			foreach (var data in _initialCardDeckMap.Values)
+			{
+				ans.Add(data);
 			}
 			return ans;
 		}

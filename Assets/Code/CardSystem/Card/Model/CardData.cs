@@ -13,6 +13,9 @@ namespace Argali.Game.CardSystem
 	{
 		public string CardName;
 	}
+	/// <summary>
+	/// 卡片配置数据结构
+	/// </summary>
 	[Serializable]
 	public struct CardInfo
 	{

@@ -48,7 +48,7 @@ namespace Argali.Game.RouletteSystem
 		{
 			foreach (var slotitem in _slotItems)
 			{
-				if (slotitem.GetTriggerType() == triggerType)
+				if (slotitem.GetSlotItemData().TriggerType == triggerType)
 				{
 					slotitem.Trigger();
 				}

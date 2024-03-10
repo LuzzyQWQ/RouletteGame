@@ -29,7 +29,6 @@ namespace Argali.Game.RouletteSystem
 		public void InitSystem()
 		{
 			// 给一个新的 转盘类
-
 		}
 		#endregion
 

@@ -16,9 +16,9 @@ namespace Argali.Game.RouletteSystem
 		/// 根据类名创建转盘
 		/// </summary>
 		/// <param name="className"></param>
-		/// <param name="cardName"></param>
+		/// <param name="rouletteName"></param>
 		/// <returns></returns>
-		public static RouletteBase CreateRoulette(string className, string cardName)
+		public static RouletteBase CreateRoulette(string className, string rouletteName)
 		{
 			Type type = ReflectionUtility.GetTypeByName(className);
 			if (type == null)
@@ -28,7 +28,7 @@ namespace Argali.Game.RouletteSystem
 			}
 			try
 			{
-				RouletteBase roulette = (RouletteBase)Activator.CreateInstance(type);
+				RouletteBase roulette = (RouletteBase)Activator.CreateInstance(type,rouletteName);
 				return roulette;
 			}
 			catch (Exception e)

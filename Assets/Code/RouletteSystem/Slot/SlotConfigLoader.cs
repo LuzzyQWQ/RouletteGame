@@ -30,7 +30,7 @@ namespace Argali.Game.RouletteSystem
 		/// 载入插槽物品总配置
 		/// </summary>
 		/// <param name="config">配置表</param>
-		private void LoadSlotItemMap(SlotMapConfig config)
+		private void LoadSlotMap(SlotMapConfig config)
 		{
 			_allSlotMap = new Dictionary<string, SlotInfo>();
 			if (config == null)
@@ -90,20 +90,20 @@ namespace Argali.Game.RouletteSystem
 		/// </summary>
 		/// <param name="slotName"></param>
 		/// <returns></returns>
-		public ISlotItem SpawnSlot(string slotName)
+		public ISlot SpawnSlot(string slotName)
 		{
 			if (_allSlotMap.ContainsKey(slotName))
 			{
 				Debug.LogError("无法找到对应GUID的卡片类" + slotName.ToString());
 				return null;
 			}
-			return SlotItemFactory.CreateInstance(_allSlotMap[slotName].ClassName,slotName);
+			return SlotFactory.CreateInstance(_allSlotMap[slotName].ClassName,slotName);
 		}
 		#endregion
 
 		private void Awake()
 		{
-			LoadSlotItemMap(_slotMapConfig);
+			LoadSlotMap(_slotMapConfig);
 		}
 	}
 

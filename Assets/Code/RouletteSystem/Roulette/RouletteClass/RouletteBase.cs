@@ -11,6 +11,11 @@ namespace Argali.Game.RouletteSystem
 	public abstract class RouletteBase
 	{
 		#region 属性
+
+		/// <summary>
+		/// 轮盘名字
+		/// </summary>
+		protected string _rouletteName;
 		/// <summary>
 		/// 轮盘插槽
 		/// </summary>
@@ -22,13 +27,44 @@ namespace Argali.Game.RouletteSystem
 		public int SlotCount { get { return _slotList.Count; } }
 
 		#endregion
-		public RouletteBase() 
-		{ 
 		
+		#region 初始化
+
+		public RouletteBase(string rouletteName) 
+		{ 
+			_rouletteName = rouletteName;
+			InitSlots();
 		}
 
+		/// <summary>
+		/// 初始化各个插槽
+		/// </summary>
+		private void InitSlots()
+		{
+			RouletteData data = GetRouletteData();
+			_slotList = new List<ISlot>();
+			foreach (var slotName in data.InitSlotNames)
+			{
+				_slotList.Add(SlotConfigLoader.Instance.SpawnSlot(slotName));
+			}
+			for (int i = 0; i < data.InitSlotItemNames.Count; i++)
+			{
+				if (i >= SlotCount)
+				{
+					Debug.LogError("转盘初始SlotItem个数超过插槽个数： "+_rouletteName);
+					continue;
+				}
+				if (data.InitSlotItemNames[i] == "")
+				{
+					continue;
+				}
+				_slotList[i].RegisterSlotItem(SlotItemConfigLoader.Instance.SpawnSlotItem(data.InitSlotItemNames[i]));
+			}
+		}
+		#endregion
 
-		#region 能力
+
+		#region 访问
 		/// <summary>
 		/// 访问转盘的插槽
 		/// </summary>
@@ -44,8 +80,16 @@ namespace Argali.Game.RouletteSystem
 			return _slotList[index];
 		}
 		
-		#endregion
+		/// <summary>
+		/// 获得转盘的数据
+		/// </summary>
+		/// <returns></returns>
+		public RouletteData GetRouletteData()
+		{
+			return RouletteConfigLoader.Instance.GetRouletteData(_rouletteName);
+		}
 
+		#endregion
 
 
 	}

@@ -565,6 +565,7 @@ GameObject:
   m_Component:
   - component: {fileID: 272720400}
   - component: {fileID: 272720402}
+  - component: {fileID: 272720403}
   m_Layer: 0
   m_Name: RouletteSystem
   m_TagString: Untagged
@@ -601,6 +602,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f63ec43eec3991243be21aa0185bd2c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &272720403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272720399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e950baee655d534e9698a62396a0673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rouletteConfig: {fileID: 11400000, guid: 0d7acb75e0f562944ab66fb2bc20a2f3, type: 2}
 --- !u!1 &296091108
 GameObject:
   m_ObjectHideFlags: 0

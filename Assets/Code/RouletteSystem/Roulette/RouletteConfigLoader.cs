@@ -90,7 +90,7 @@ namespace Argali.Game.RouletteSystem
 		/// </summary>
 		/// <param name="rouletteName"></param>
 		/// <returns></returns>
-		public RouletteBase SpawnSlot(string rouletteName)
+		public RouletteBase SpawnRoulette(string rouletteName)
 		{
 			if (_rouletteMap.ContainsKey(rouletteName))
 			{

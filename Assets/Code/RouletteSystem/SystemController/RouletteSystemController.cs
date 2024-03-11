@@ -18,17 +18,27 @@ namespace Argali.Game.RouletteSystem
 		/// </summary>
 		public RouletteBase Roulette;
 
+		/// <summary>
+		/// 轮盘系统局内数据
+		/// </summary>
+		public RouletteSystemInGameData InGameData;
+
 		#endregion
 
 		#region 方法
 
 		#region 初始化
 		/// <summary>
-		/// 初始化系统
+		/// 初始化系统，每次开始一局游戏时，进行初始化。
 		/// </summary>
-		public void InitSystem()
+		public void InitSystem(string rouletteName, RouletteSystemModeInfo modeInfo)
 		{
+			// 初始化loader
+
+			// 初始化局内数据
+			InGameData = new RouletteSystemInGameData();
 			// 给一个新的 转盘类
+			Roulette = RouletteConfigLoader.Instance.SpawnRoulette(rouletteName);
 		}
 		#endregion
 

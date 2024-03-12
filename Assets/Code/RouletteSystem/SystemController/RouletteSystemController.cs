@@ -38,7 +38,7 @@ namespace Argali.Game.RouletteSystem
 			// 初始化局内数据
 			InGameData = new RouletteSystemInGameData();
 			// 给一个新的 转盘类
-			Roulette = RouletteConfigLoader.Instance.SpawnRoulette(rouletteName);
+			Roulette = RouletteSystemConfigLoader.Instance.SpawnRoulette(rouletteName);
 		}
 		#endregion
 

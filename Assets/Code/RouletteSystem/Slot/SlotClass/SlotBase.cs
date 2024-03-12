@@ -10,6 +10,7 @@ namespace Argali.Game.RouletteSystem
 	public abstract class SlotBase : ISlot
 	{
 		#region 属性
+		protected string _slotName;
 		protected bool _active;
 		protected bool _destroyed;
 		protected List<ISlotItem> _slotItems;
@@ -19,8 +20,9 @@ namespace Argali.Game.RouletteSystem
 		protected event SlotItemHandleDelegate _onSlotItemAdd;
 		protected event SlotItemHandleDelegate _onSlotItemRemove;
 		#endregion
-		public SlotBase()
+		public SlotBase(string slotName)
 		{
+			_slotName = slotName;
 			_active = true;
 			_destroyed = false;
 			_slotItems = new List<ISlotItem>();

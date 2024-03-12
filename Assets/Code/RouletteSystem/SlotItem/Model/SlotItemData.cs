@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Argali.Module.DataBase.ConfigLoader;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,14 +30,22 @@ namespace Argali.Game.RouletteSystem
 		/// </summary>
 		public SlotItemTriggerType TriggerType;
 	}
+	/// <summary>
+	/// 插槽物品信息
+	/// </summary>
 	[Serializable]
-	public struct SlotItemInfo
+	public class SlotItemInfo : IConfigInfo
 	{
 		public int Index;
 		public SlotItemData SlotItemData;
 		/// <summary>
 		/// 插槽物品 类名
 		/// </summary>
-		public string SlotItemClassName;
+		public string ClassName;
+
+		public string GetGUID()
+		{
+			return SlotItemData.SlotItemName;
+		}
 	}
 } 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Argali.Module.DataBase.ConfigLoader;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,10 +18,15 @@ namespace Argali.Game.RouletteSystem
 	/// 插槽信息
 	/// </summary>
 	[Serializable]
-	public struct SlotInfo
+	public class SlotInfo : IConfigInfo
 	{
 		public int Index;
 		public SlotData SlotData;
 		public string ClassName;
+
+		public string GetGUID()
+		{
+			return SlotData.SlotName;
+		}
 	}
 }

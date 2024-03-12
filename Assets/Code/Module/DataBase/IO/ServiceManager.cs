@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Argali.Module.DataBase
+namespace Argali.Module.DataBase.IO
 {
 	/// <summary>
 	/// Service用于保存各种数据

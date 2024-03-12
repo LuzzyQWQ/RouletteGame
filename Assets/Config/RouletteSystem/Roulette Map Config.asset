@@ -15,7 +15,31 @@ MonoBehaviour:
   data:
   - Index: 0
     RouletteData:
-      RouletteName: 
-      InitSlotNames: []
-      InitSlotItemNames: []
-    ClassName: 
+      RouletteName: base
+      InitSlotNames:
+      - base
+      - base
+      - base
+      - base
+      - base
+      - base
+      - base
+      - base
+      - base
+      - base
+      - base
+      - base
+      InitSlotItemNames:
+      - attack_up
+      - attack_up
+      - attack_up
+      - attack_up
+      - attack_up
+      - attack_up
+      - attack_up
+      - attack_up
+      - attack_up
+      - attack_up
+      - attack_up
+      - attack_up
+    ClassName: NormalRoulette

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Argali.Module.DataBase.ConfigLoader;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,10 +20,15 @@ namespace Argali.Game.RouletteSystem
 	/// 初始转盘信息
 	/// </summary>
 	[Serializable]
-	public struct RouletteInfo
+	public class RouletteInfo: IConfigInfo
 	{
 		public int Index;
 		public RouletteData RouletteData;
 		public string ClassName;
+
+		public string GetGUID()
+		{
+			return RouletteData.RouletteName;
+		}
 	}
 }

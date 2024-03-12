@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: ConfigScirptableObject
+  m_EditorClassIdentifier: 
+  m_GroupName: ConfigScirptableObject
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 439cf39162a94454baf3687830aa7956
+  m_SerializeEntries:
+  - m_GUID: d6b2ba22793470c48b26aa09238caca6
+    m_Address: Initial Card Deck Config
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 95067c8738d1a8d42875ea65d149ca79
+    m_Address: Card Map Config
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0d7acb75e0f562944ab66fb2bc20a2f3
+    m_Address: Roulette Map Config
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3054f6538593c1d4b8f57d85a3a3572b
+    m_Address: Roulette System Mode Config
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 90cf6e2f2d3d0df4780cb8009c9b5d3f
+    m_Address: Slot Item Map Config
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 06eac01fb49474c4c822adc6e868988b
+    m_Address: Slot Map Config
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 463f3533418862b48aafa593e19a1659, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: c96cb0e144a37054eb4230e909cacb40, type: 2}
+    - {fileID: 11400000, guid: 3510362767fadff4fa1c87905626f1b4, type: 2}

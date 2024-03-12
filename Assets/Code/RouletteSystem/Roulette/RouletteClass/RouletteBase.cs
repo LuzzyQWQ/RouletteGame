@@ -45,7 +45,7 @@ namespace Argali.Game.RouletteSystem
 			_slotList = new List<ISlot>();
 			foreach (var slotName in data.InitSlotNames)
 			{
-				_slotList.Add(SlotConfigLoader.Instance.SpawnSlot(slotName));
+				_slotList.Add(RouletteSystemConfigLoader.Instance.SpawnSlot(slotName));
 			}
 			for (int i = 0; i < data.InitSlotItemNames.Count; i++)
 			{
@@ -58,7 +58,7 @@ namespace Argali.Game.RouletteSystem
 				{
 					continue;
 				}
-				_slotList[i].RegisterSlotItem(SlotItemConfigLoader.Instance.SpawnSlotItem(data.InitSlotItemNames[i]));
+				_slotList[i].RegisterSlotItem(RouletteSystemConfigLoader.Instance.SpawnSlotItem(data.InitSlotItemNames[i]));
 			}
 		}
 		#endregion
@@ -86,7 +86,7 @@ namespace Argali.Game.RouletteSystem
 		/// <returns></returns>
 		public RouletteData GetRouletteData()
 		{
-			return RouletteConfigLoader.Instance.GetRouletteData(_rouletteName);
+			return RouletteSystemConfigLoader.Instance.RouletteLoader.GetInfo(_rouletteName).RouletteData;
 		}
 
 		#endregion

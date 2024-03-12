@@ -1,5 +1,6 @@
 ﻿using Argali.Game.CardSystem;
 using Argali.Game.CardSystem.UI;
+using Argali.Game.RouletteSystem;
 using Argali.Module.Singleton;
 using Argali.UI.Pop;
 using System.Collections;
@@ -18,8 +19,17 @@ namespace Argali.Game
 		{
 			// 初始化卡片系统
 			CardSystemController.Instance.InitSystemWithDeck("base", new CardSystemConfig() { PreDefinedCardDeckName = "",MaxHandCount = 5,DropCount = 2});
-			CardSystemController.Instance.CreateRound(PopRoundPanelAndStart);
 
+			// 初始化转盘系统
+			RouletteSystemConfigLoader.Instance.LoadMode("base", () =>
+			{
+				RouletteSystemController.Instance.InitSystem("base", RouletteSystemConfigLoader.Instance.ModeLoader.GetInfo("base"));
+				// 开始回合
+				CardSystemController.Instance.CreateRound(PopRoundPanelAndStart);
+			});
+
+
+			
 		}
 		/// <summary>
 		/// 弹出回合游戏界面， 开始游戏

@@ -12,14 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b17fbcc98cbcca041949baa8afe50dae, type: 3}
   m_Name: Slot Item Map Config
   m_EditorClassIdentifier: 
-  config:
+  data:
   - Index: 0
     SlotItemData:
-      SlotItemName: 
+      SlotItemName: attack_up
       TriggerType: 0
-    SlotItemClassName: 
-  - Index: 0
-    SlotItemData:
-      SlotItemName: 
-      TriggerType: 0
-    SlotItemClassName: 
+    ClassName: AttackUpSlotItem

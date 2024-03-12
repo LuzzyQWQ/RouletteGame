@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Argali.Module.DataBase
+namespace Argali.Module.DataBase.IO
 {
 	/// <summary>
 	/// 基于ES3的数据服务抽象类

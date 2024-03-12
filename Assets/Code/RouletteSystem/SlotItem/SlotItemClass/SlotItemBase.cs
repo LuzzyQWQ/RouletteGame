@@ -29,7 +29,7 @@ namespace Argali.Game.RouletteSystem
 
 		public SlotItemData GetSlotItemData()
 		{
-			return SlotItemConfigLoader.Instance.GetSlotItemData(_slotItemName);
+			return RouletteSystemConfigLoader.Instance.SlotItemLoader.GetInfo(_slotItemName).SlotItemData;
 		}
 		public bool IsAvailable() { return _active; }
 		public void Activate(bool active) {  _active = active; }

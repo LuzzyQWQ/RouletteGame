@@ -10,8 +10,9 @@ namespace Argali.Game.CardSystem
 {
 
 	/// <summary>
-	/// 用于控制当前回合的卡组行为
+	/// 卡片系统回合控制器
 	/// </summary>
+	/// <remarks>用于控制当前回合的卡组行为</remarks>
 	public class CardSystemRoundController
 	{
 		#region 属性

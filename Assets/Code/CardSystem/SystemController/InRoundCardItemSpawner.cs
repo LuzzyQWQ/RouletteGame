@@ -8,9 +8,9 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 namespace Argali.Game.CardSystem.UI
 {
 	/// <summary>
-	/// 局内 CardItemController 生成器
-	/// 在局内 通过AddComponent 加入 InRoundCardDeckArea
+	/// 回合内卡片物体UI生成器
 	/// </summary>
+	/// <remarks>在局内 通过AddComponent 加入 InRoundCardDeckArea</remarks>
 	public class InRoundCardItemSpawner
 	{
 		#region Element

@@ -42,21 +42,21 @@ namespace Argali.Game.CardSystem
 		/// <summary>
 		/// 初始化系统
 		/// </summary>
-		public void InitSystem(CardSystemConfig config)
+		public void InitSystem(CardSystemModeInfo config)
 		{
 			InitSystem(config, DateTime.UtcNow.ToString());
 		}
-		public void InitSystem(CardSystemConfig config, string seed)
+		public void InitSystem(CardSystemModeInfo config, string seed)
 		{
 			InitSystemWithDeck(config.PreDefinedCardDeckName, config, seed);
 		}
-		public void InitSystemWithDeck(string deckName, CardSystemConfig config, string seed)
+		public void InitSystemWithDeck(string deckName, CardSystemModeInfo config, string seed)
 		{
 			SystemInGameData = new CardSystemInGameData(config, seed);
 			// 生成用户卡组
-			UserCardDeck = new CardDeck(CardConfigLoader.Instance.GetInitialDeckCards(deckName));
+			UserCardDeck = new CardDeck(CardSystemConfigLoader.Instance.GetInitCardDeck(deckName));
 		}
-		public void InitSystemWithDeck(string deckName, CardSystemConfig config)
+		public void InitSystemWithDeck(string deckName, CardSystemModeInfo config)
 		{
 			InitSystemWithDeck(deckName,config, DateTime.UtcNow.ToString());
 		}

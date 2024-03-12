@@ -31,7 +31,7 @@ namespace Argali.Game.CardSystem.UI
 		private CardBase Card;
 
 		#endregion
-		
+
 		/// <summary>
 		/// 生成初始化
 		/// </summary>
@@ -68,11 +68,11 @@ namespace Argali.Game.CardSystem.UI
 			}
 		}
 
-		private	void OnUse(InRoundCardItem item, params object[] args)
+		private void OnUse(InRoundCardItem item, params object[] args)
 		{
-			if(item == this) 
+			if (item == this)
 			{
-				CardSystemController.Instance.CurrentRoundController.UseCard(Card,args);
+				CardSystemController.Instance.CurrentRoundController.UseCard(Card, args);
 				Destroy(gameObject);
 			}
 		}
@@ -100,7 +100,7 @@ namespace Argali.Game.CardSystem.UI
 		{
 			_bg.color = selected ? Color.blue : Color.white;
 		}
-		
+
 
 		private void Awake()
 		{
@@ -120,7 +120,10 @@ namespace Argali.Game.CardSystem.UI
 			_cardItemController.OnSelectCardItem -= OnSelect;
 			_cardItemController.OnUseCardItem -= OnUse;
 			_cardItemController.OnDropCardItem -= OnDrop;
-			CardSystemController.Instance.CurrentRoundController.OnRestDropCountChanged -= OnDropCountChange;
+			if (CardSystemController.Instance != null)
+			{
+				CardSystemController.Instance.CurrentRoundController.OnRestDropCountChanged -= OnDropCountChange;
+			}
 		}
 		private void InitElement()
 		{
@@ -140,7 +143,7 @@ namespace Argali.Game.CardSystem.UI
 		}
 
 		#region 按钮事件
-		
+
 		private void OnDropButtonClick()
 		{
 			_cardItemController.DropCard();

@@ -16,9 +16,9 @@ namespace Argali.Game.CardSystem
 		public string SeedName;
 
 		/// <summary>
-		/// 初始配置
+		/// 模式信息
 		/// </summary>
-		public CardSystemConfig InitConfig;
+		public CardSystemModeInfo ModeInfo;
 
 		/// <summary>
 		/// 回合数
@@ -43,19 +43,19 @@ namespace Argali.Game.CardSystem
 		
 		public int GetCurrentHandCount()
 		{
-			return InitConfig.MaxHandCount + ExtraHandCount;
+			return ModeInfo.MaxHandCount + ExtraHandCount;
 		}
 
 		public int GetCurrentDropCount()
 		{
-			return InitConfig.DropCount + ExtraDropCount;
+			return ModeInfo.DropCount + ExtraDropCount;
 		}
 
 
-		public CardSystemInGameData(CardSystemConfig config,string seed)
+		public CardSystemInGameData(CardSystemModeInfo modeInfo,string seed)
 		{
 			SeedName = seed;
-			InitConfig = config;
+			ModeInfo = modeInfo;
 			RoundCount = 0;
 			ExtraHandCount = 0;
 			ExtraDropCount = 0;

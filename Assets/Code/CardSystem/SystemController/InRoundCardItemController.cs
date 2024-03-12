@@ -6,8 +6,9 @@ using UnityEngine.UI;
 namespace Argali.Game.CardSystem.UI
 {
 	/// <summary>
-	/// （UI）管理局内CardItem逻辑
+	/// 回合内卡片物体UI控制器
 	/// </summary>
+	/// <remarks>（UI）管理局内CardItem逻辑, 在CardSystemRoundController下引用</remarks>
 	public class InRoundCardItemController
 	{
 

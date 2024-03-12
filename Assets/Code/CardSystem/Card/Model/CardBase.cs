@@ -23,7 +23,7 @@ namespace Argali.Game.CardSystem
 		}	
 		public CardData GetCardData()
 		{
-			return CardConfigLoader.Instance.FindCardDataByName(_cardName);
+			return CardSystemConfigLoader.Instance.CardLoader.GetInfo(_cardName).CardData;
 		}
 
 		public abstract void SelectCard();

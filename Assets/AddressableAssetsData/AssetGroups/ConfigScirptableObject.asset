@@ -18,7 +18,7 @@ MonoBehaviour:
   m_GUID: 439cf39162a94454baf3687830aa7956
   m_SerializeEntries:
   - m_GUID: d6b2ba22793470c48b26aa09238caca6
-    m_Address: Initial Card Deck Config
+    m_Address: Card Deck Config
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -44,6 +44,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 06eac01fb49474c4c822adc6e868988b
     m_Address: Slot Map Config
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aa03febb13ab8fc41a037bd9fcc7c228
+    m_Address: Card System Mode Config
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

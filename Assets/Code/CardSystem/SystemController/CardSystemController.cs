@@ -7,12 +7,6 @@ using UnityEngine;
 namespace Argali.Game.CardSystem
 {
 
-	public enum CardSystemState
-	{
-		InRound,		// 在局内
-		NotInRound,		// 在局外
-	}
-
 	/// <summary>
 	/// 卡片系统控制器
 	/// </summary>

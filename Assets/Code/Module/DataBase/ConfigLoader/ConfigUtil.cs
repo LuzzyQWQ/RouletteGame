@@ -27,6 +27,7 @@ namespace Argali.Module.DataBase.ConfigLoader
 			{
 				ScriptableObject config = handle.Result;
 				onLoadSuccess?.Invoke(config);
+				Addressables.Release(handle);
 			}
 			else
 			{

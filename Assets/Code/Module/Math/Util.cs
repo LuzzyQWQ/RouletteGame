@@ -95,7 +95,7 @@ namespace Argali.Util.Math
             return Ease.EaseInQuad;
         }
 
-
+		
     }
 
 }

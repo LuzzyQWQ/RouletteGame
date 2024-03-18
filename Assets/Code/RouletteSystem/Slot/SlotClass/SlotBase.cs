@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Argali.Game.CharacterSystem;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -46,13 +47,13 @@ namespace Argali.Game.RouletteSystem
 			_onSlotItemRemove?.Invoke(slotItem);
 		}
 
-		public virtual void Trigger(SlotItemTriggerType triggerType) 
+		public virtual void Trigger(ref CharacterInRoundData characterInRoundData,SlotItemTriggerType triggerType) 
 		{
 			foreach (var slotitem in _slotItems)
 			{
 				if (slotitem.GetSlotItemData().TriggerType == triggerType)
 				{
-					slotitem.Trigger();
+					slotitem.Trigger(ref characterInRoundData);
 				}
 			}
 		}

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Argali.Game.CharacterSystem;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,7 +45,7 @@ namespace Argali.Game.RouletteSystem
 				_locateSlot.RemoveSlotItem(this);
 			}
 		}
-		public abstract void Trigger();
+		public abstract void Trigger(ref CharacterInRoundData characterInRoundData);
 
 
 	}

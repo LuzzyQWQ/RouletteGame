@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Argali.Game.CharacterSystem;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,6 +24,6 @@ namespace Argali.Game.RouletteSystem
 		/// <summary>
 		/// 触发能力
 		/// </summary>
-		public void Trigger();
+		public void Trigger(ref CharacterInRoundData characterInRoundData);
 	}
 }

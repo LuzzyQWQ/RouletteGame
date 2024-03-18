@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Argali.Game.CharacterSystem;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ namespace Argali.Game.RouletteSystem
 		/// <summary>
 		/// 增加攻击力
 		/// </summary>
-		public override void Trigger()
+		public override void Trigger(ref CharacterInRoundData characterInRoundData)
 		{
 			Debug.Log("攻击力增加了");
 		}

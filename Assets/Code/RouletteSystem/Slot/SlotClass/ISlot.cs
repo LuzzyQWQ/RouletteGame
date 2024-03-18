@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Argali.Game.CharacterSystem;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +21,6 @@ namespace Argali.Game.RouletteSystem
 		public void RegisterSlotItem(ISlotItem slotItem);
 		public void RemoveSlotItem(ISlotItem slotItem);
 
-		public void Trigger(SlotItemTriggerType triggerType);
+		public void Trigger(ref CharacterInRoundData characterData, SlotItemTriggerType triggerType);
 	}
 }

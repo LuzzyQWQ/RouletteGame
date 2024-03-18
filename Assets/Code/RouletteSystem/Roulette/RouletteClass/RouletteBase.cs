@@ -81,6 +81,16 @@ namespace Argali.Game.RouletteSystem
 		}
 		
 		/// <summary>
+		/// 获得下一个插槽的下标
+		/// </summary>
+		/// <param name="currentindex"></param>
+		/// <param name="isForward"></param>
+		/// <returns></returns>
+		public int GetNextIndex(int currentindex, bool isForward)
+		{
+			return isForward ? (currentindex + 1) % SlotCount : (currentindex - 1 + SlotCount) % SlotCount;
+		}
+		/// <summary>
 		/// 获得转盘的数据
 		/// </summary>
 		/// <returns></returns>

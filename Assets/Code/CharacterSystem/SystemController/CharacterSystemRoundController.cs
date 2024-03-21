@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
@@ -16,7 +17,7 @@ namespace Argali.Game.CharacterSystem
 		/// <summary>
 		/// 回合内数据
 		/// </summary>
-		public CharacterInRoundData RoundData;
+		public CharacterInRoundData PlayerRoundData;
 
 		/// <summary>
 		/// 角色移动指令执行器
@@ -25,7 +26,6 @@ namespace Argali.Game.CharacterSystem
 		#endregion
 
 		#region 事件
-		private System.Action _onFinishLoad;
 		#endregion
 
 		#region 事件
@@ -38,46 +38,26 @@ namespace Argali.Game.CharacterSystem
 		/// <remarks>使用保存的数据</remarks>
 		/// <param name="loadData"></param>
 		/// <param name="onFinish"></param>
-		public CharacterSystemRoundController(CharacterInRoundData loadData, System.Action onFinish) : this(onFinish)
+		private CharacterSystemRoundController(CharacterInRoundData loadData) : this()
 		{
-			RoundData = loadData;
+			PlayerRoundData = loadData;
+		}
+
+		private CharacterSystemRoundController()
+		{
+			PlayerRoundData = new CharacterInRoundData(CharacterSystemController.Instance.PlayerInGameData);
+			Commander = new MovementCommandExecuter();
 		}
 
 		/// <summary>
 		/// 创建角色回合控制器
 		/// </summary>
 		/// <param name="onFinish"></param>
-		public CharacterSystemRoundController(System.Action onFinish)
+		public static async UniTask<CharacterSystemRoundController> Create()
 		{
-			RoundData = new CharacterInRoundData(CharacterSystemController.Instance.InGameData);
-			Commander = new MovementCommandExecuter();
-			_onFinishLoad = onFinish;
-		}
-		#endregion
-
-		#region 控制
-		/// <summary>
-		/// 角色转向
-		/// </summary>
-		public void TurnBack()
-		{
-			RoundData.CurrentForward = !RoundData.CurrentForward;
-		}
-
-		/// <summary>
-		/// 向前移动一格
-		/// </summary>
-		public void MoveForward()
-		{
-			throw new NotImplementedException();
-		}
-
-		/// <summary>
-		/// 停留
-		/// </summary>
-		public void Stay()
-		{
-			throw new NotImplementedException();
+			CharacterSystemRoundController instance = new CharacterSystemRoundController();
+			await UniTask.Yield();
+			return instance;
 		}
 		#endregion
 

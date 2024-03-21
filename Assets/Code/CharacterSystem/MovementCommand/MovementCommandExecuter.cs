@@ -43,7 +43,7 @@ namespace Argali.Game.CharacterSystem
 		/// </summary>
 		/// <param name="characterInRoundData"></param>
 		/// <param name="commands"></param>
-		public async void RunCommands(CharacterInRoundData characterInRoundData, List<IMovementCommand> commands)
+		public async void RunCommands(List<IMovementCommand> commands)
 		{
 			if(IsExecuting)
 			{
@@ -53,7 +53,7 @@ namespace Argali.Game.CharacterSystem
 			MovementCommandGroup group = new MovementCommandGroup();
 			group.Commands = commands;
 			//_currentGroup = group;
-			await ExecuteGroup(characterInRoundData, group);
+			await ExecuteGroup(group);
 			//// 命令执行结束，玩家可以进行下一步操作
 			//OnCommandGroupFinish?.Invoke();
 		}
@@ -71,7 +71,7 @@ namespace Argali.Game.CharacterSystem
 			CharacterInRoundData beforeData, afterData = new(data);
 			movementCommand.Execute(ref afterData);
 			// TODO: 更新数据
-
+			CharacterSystemController.Instance.RoundController.PlayerRoundData = afterData;
 			// 检查是否需要打断后续事件
 			bool isCancel = default;
 
@@ -85,7 +85,7 @@ namespace Argali.Game.CharacterSystem
 		/// <param name="data"></param>
 		/// <param name="group"></param>
 		/// <returns></returns>
-		private async UniTask ExecuteGroup(CharacterInRoundData data, MovementCommandGroup group)
+		private async UniTask ExecuteGroup(MovementCommandGroup group)
 		{
 			IsExecuting = true;
 			bool isCancel = false;
@@ -93,7 +93,7 @@ namespace Argali.Game.CharacterSystem
 			{
 				// 检测是否有取消指令
 				// 某些指令会中断后续指令
-				isCancel = await CommandExecution(data, command);
+				isCancel = await CommandExecution(CharacterSystemController.Instance.RoundController.PlayerRoundData, command);
 			}
 			if (isCancel)
 			{
@@ -101,6 +101,7 @@ namespace Argali.Game.CharacterSystem
 			}
 			IsExecuting = false;
 		}
+
 	}
 
 

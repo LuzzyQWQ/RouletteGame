@@ -1,4 +1,5 @@
 ﻿using Argali.Module.Singleton;
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,9 +14,9 @@ namespace Argali.Game.CharacterSystem
 	{
 		#region 属性
 		/// <summary>
-		/// 角色局内属性
+		/// 玩家角色局内属性
 		/// </summary>
-		public CharacterInGameData InGameData { get; private set; }
+		public CharacterInGameData PlayerInGameData { get; private set; }
 
 		#endregion
 
@@ -27,12 +28,26 @@ namespace Argali.Game.CharacterSystem
 
 		#endregion
 
+		#region 初始化
+		/// <summary>
+		/// 初始化系统
+		/// </summary>
+		/// <param name="playerName"></param>
+		public void InitSystem(string playerName)
+		{
+			// 初始化玩家角色数据
+			PlayerInGameData = new CharacterInGameData();
+		}
+
+		#endregion 
+
+		#region 回合相关
 		/// <summary>
 		/// 创建一个回合
 		/// </summary>
-		public void CreateRound(System.Action onFinish)
+		public async UniTask CreateRound()
 		{
-			RoundController = new CharacterSystemRoundController(onFinish);
+			RoundController = await CharacterSystemRoundController.Create();
 		}
 
 		/// <summary>
@@ -49,6 +64,7 @@ namespace Argali.Game.CharacterSystem
 		{
 			throw new NotImplementedException();
 		}
+		#endregion
 	}
 
 }

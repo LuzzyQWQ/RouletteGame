@@ -1,5 +1,6 @@
 ﻿using Argali.Module.DataBase.ConfigLoader;
 using Argali.Module.Singleton;
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +21,7 @@ namespace Argali.Game.RouletteSystem
 		/// <remarks> 初始加载 </remarks>
 		/// </summary>
 		public ConfigLoader<RouletteSystemModeInfo> ModeLoader;
-	
+
 		/// <summary>
 		/// 转盘配置加载器
 		/// <remarks> 初始加载 </remarks>
@@ -46,20 +47,17 @@ namespace Argali.Game.RouletteSystem
 		/// 加载模式
 		/// </summary>
 		/// <param name="modeName"></param>
-		/// <param name="onFinish"></param>
-		public void LoadMode(string modeName, System.Action onFinish)
+		public async UniTask LoadMode(string modeName)
 		{
 			RouletteSystemModeInfo info = ModeLoader.GetInfo(modeName);
 			// 加载插槽物品配置
-			StartCoroutine(ConfigUtil.LoadConfigAsset(info.SlotItemConfigPath, (so) =>
+			var slotItemAsset = await ConfigUtil.LoadConfigAsset(info.SlotItemConfigPath);
+
+			if (slotItemAsset is SlotItemMapConfig)
 			{
-				if (so is SlotItemMapConfig)
-				{
-					SlotItemMapConfig config = so as SlotItemMapConfig;
-					SlotItemLoader.Load(config.data);
-					onFinish?.Invoke();
-				}
-			}));
+				SlotItemMapConfig config = slotItemAsset as SlotItemMapConfig;
+				SlotItemLoader.Load(config.data);
+			}
 		}
 		#endregion
 
@@ -109,32 +107,35 @@ namespace Argali.Game.RouletteSystem
 			SlotItemLoader = new ConfigLoader<SlotItemInfo>();
 
 			// 加载模式配置
-			StartCoroutine(ConfigUtil.LoadConfigAsset("Roulette System Mode Config", (so) =>
+			UniTask.Create(async () =>
 			{
-				if(so is RouletteSystemModeConfig)
+				var modeAsset = await ConfigUtil.LoadConfigAsset("Roulette System Mode Config");
+				if (modeAsset is RouletteSystemModeConfig)
 				{
-					RouletteSystemModeConfig config = so as RouletteSystemModeConfig;
+					RouletteSystemModeConfig config = modeAsset as RouletteSystemModeConfig;
 					ModeLoader.Load(config.data);
 				}
-			}));
+			}).Forget();
 			// 加载转盘配置
-			StartCoroutine(ConfigUtil.LoadConfigAsset("Roulette Map Config", (so) =>
+			UniTask.Create(async () =>
 			{
-				if (so is RouletteMapConfig)
+				var rouletteAsset = await ConfigUtil.LoadConfigAsset("Roulette Map Config");
+				if (rouletteAsset is RouletteMapConfig)
 				{
-					RouletteMapConfig config = so as RouletteMapConfig;
+					RouletteMapConfig config = rouletteAsset as RouletteMapConfig;
 					RouletteLoader.Load(config.data);
 				}
-			}));
+			}).Forget();
 			// 加载插槽配置
-			StartCoroutine(ConfigUtil.LoadConfigAsset("Slot Map Config", (so) =>
+			UniTask.Create(async () =>
 			{
-				if (so is SlotMapConfig)
+				var slotAsset = await ConfigUtil.LoadConfigAsset("Slot Map Config");
+				if (slotAsset is SlotMapConfig)
 				{
-					SlotMapConfig config = so as SlotMapConfig;
+					SlotMapConfig config = slotAsset as SlotMapConfig;
 					SlotLoader.Load(config.data);
 				}
-			}));
+			}).Forget();
 		}
 
 		private void Awake()

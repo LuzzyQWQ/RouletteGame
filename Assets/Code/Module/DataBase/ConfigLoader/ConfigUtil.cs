@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Cysharp.Threading.Tasks;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -15,24 +16,14 @@ namespace Argali.Module.DataBase.ConfigLoader
 		/// <param name="path"></param>
 		/// <param name="onLoadSuccess"></param>
 		/// <returns></returns>
-		public static IEnumerator LoadConfigAsset(string path, System.Action<ScriptableObject> onLoadSuccess)
+		public static async UniTask<ScriptableObject> LoadConfigAsset(string path)
 		{
 			if (path == "")
 			{
-				yield break;
+				return null;
 			}
-			AsyncOperationHandle<ScriptableObject> handle = Addressables.LoadAssetAsync<ScriptableObject>(path);
-			yield return handle;
-			if (handle.Status == AsyncOperationStatus.Succeeded)
-			{
-				ScriptableObject config = handle.Result;
-				onLoadSuccess?.Invoke(config);
-				Addressables.Release(handle);
-			}
-			else
-			{
-				Debug.LogError("LoadConfigAsset Failed");
-			}
+			var config = await Addressables.LoadAssetAsync<ScriptableObject>(path);
+			return config;
 		}
 	}
 

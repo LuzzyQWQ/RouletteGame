@@ -19,8 +19,9 @@ namespace Argali.Game.RouletteSystem
 		/// </summary>
 		public override CharacterInRoundData Trigger(CharacterInRoundData characterInRoundData)
 		{
-			characterInRoundData.Attack += 10;
-			Debug.Log("攻击力增加了10");
+			int attackUpCount = 10;
+			characterInRoundData.Attack += attackUpCount;
+			Debug.Log(string.Format("触发第 {0} 格攻击增加物品，攻击力增加了{1}, 当前攻击力为 {2}",characterInRoundData.CurrentIndex,attackUpCount, characterInRoundData.Attack));
 			return characterInRoundData;
 		}
 	}

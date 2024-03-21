@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Cysharp.Threading.Tasks;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
@@ -20,21 +21,25 @@ namespace Argali.Game.CardSystem.UI
 
 		#region Prarameter
 		/// <summary>
-		/// 是否加载完成资源
+		/// 手牌区域
 		/// </summary>
-		public bool IsReady { get; private set; }
-
-		private AsyncOperationHandle<GameObject> _cardItemHandle;
-
 		private RectTransform _handCardContainer;
 		#endregion
-		public InRoundCardItemSpawner()
+
+		#region 构造
+		private InRoundCardItemSpawner()
 		{
-			IsReady = false;
 			CardSystemController.Instance.UserCardDeck.OnDrawCard += SpawnCard;
-			_cardItemHandle = Addressables.LoadAssetAsync<GameObject>("InRoundCardItem");
-			_cardItemHandle.Completed += LoadComplete;
 		}
+		public static async UniTask<InRoundCardItemSpawner> Create()
+		{
+			InRoundCardItemSpawner instance = new InRoundCardItemSpawner();
+			var prefab = await Addressables.LoadAssetAsync<GameObject>("InRoundCardItem");
+			instance._cardItemPrefab = prefab;
+			return instance;
+		}
+		#endregion
+
 		// 初始化
 		public void SetContainer(RectTransform container)
 		{
@@ -65,26 +70,11 @@ namespace Argali.Game.CardSystem.UI
 			InRoundCardItem item = GameObject.Instantiate(_cardItemPrefab, _handCardContainer).GetComponent<InRoundCardItem>();
 			item.InitCardItem(card as CardBase);
 		}
-
-		private void LoadComplete(AsyncOperationHandle<GameObject> operation)
-		{
-			if (operation.Status == AsyncOperationStatus.Succeeded)
-			{
-				IsReady = true;
-				_cardItemPrefab = operation.Result;
-			}
-			else
-			{
-				Debug.LogError($"Asset failed to load.");
-			}
-		}
 		
-
 
 		public void Destroy()
 		{
 			CardSystemController.Instance.UserCardDeck.OnDrawCard -= SpawnCard;
-			Addressables.Release(_cardItemHandle);
 		}
 	}
 

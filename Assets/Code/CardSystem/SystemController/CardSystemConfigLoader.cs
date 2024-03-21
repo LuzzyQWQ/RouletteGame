@@ -1,5 +1,6 @@
 ﻿using Argali.Module.DataBase.ConfigLoader;
 using Argali.Module.Singleton;
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,18 +36,15 @@ namespace Argali.Game.CardSystem
 		/// </summary>
 		/// <param name="modeName"></param>
 		/// <param name="onFinish"></param>
-		public void LoadMode(string modeName, System.Action onFinish)
+		public async UniTask LoadMode(string modeName)
 		{
 			CardSystemModeInfo info = ModeLoader.GetInfo(modeName);
-			StartCoroutine(ConfigUtil.LoadConfigAsset(info.CardConfigPath, (so) =>
+			var so = await ConfigUtil.LoadConfigAsset(info.CardConfigPath);
+			if (so is CardMapConfig)
 			{
-				if (so is CardMapConfig)
-				{
-					CardMapConfig config = so as CardMapConfig;
-					CardLoader.Load(config.data);
-					onFinish?.Invoke();
-				}
-			}));
+				CardMapConfig config = so as CardMapConfig;
+				CardLoader.Load(config.data);
+			}
 		}
 		#region 生成
 		/// <summary>
@@ -88,23 +86,25 @@ namespace Argali.Game.CardSystem
 			CardDeckLoader = new ConfigLoader<CardDeckInfo>();
 			CardLoader = new ConfigLoader<CardInfo>();
 			// 加载模式配置
-			StartCoroutine(ConfigUtil.LoadConfigAsset("Card System Mode Config", (so) =>
+			UniTask.Create(async () =>
 			{
+				var so = await ConfigUtil.LoadConfigAsset("Card System Mode Config");
 				if (so is CardSystemModeConfig)
 				{
 					CardSystemModeConfig config = so as CardSystemModeConfig;
 					ModeLoader.Load(config.data);
 				}
-			}));
+			}).Forget();
 			// 加载卡组配置
-			StartCoroutine(ConfigUtil.LoadConfigAsset("Card Deck Config", (so) =>
+			UniTask.Create(async () =>
 			{
+				var so = await ConfigUtil.LoadConfigAsset("Card Deck Config");
 				if (so is CardDeckConfig)
 				{
 					CardDeckConfig config = so as CardDeckConfig;
 					CardDeckLoader.Load(config.data);
 				}
-			}));
+			}).Forget();
 		}
 
 		public void Awake()

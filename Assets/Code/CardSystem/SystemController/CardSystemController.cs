@@ -1,4 +1,5 @@
 ﻿using Argali.Module.Singleton;
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -63,10 +64,10 @@ namespace Argali.Game.CardSystem
 		/// 创建回合控制器
 		/// 需要初始化牌组
 		/// </summary>
-		public void CreateRound(System.Action onFinish)
+		public async UniTask CreateRound()
 		{
 			SystemInGameData.RoundCount++;
-			CurrentRoundController = new CardSystemRoundController(onFinish);
+			CurrentRoundController = await CardSystemRoundController.Create();
 		}
 		/// <summary>
 		/// 加载回合控制器

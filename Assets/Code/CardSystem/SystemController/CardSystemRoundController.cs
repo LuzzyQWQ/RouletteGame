@@ -1,8 +1,10 @@
 ﻿using Argali.Game.CardSystem.UI;
 using Argali.UI.Pop;
+using Cysharp.Threading.Tasks;
 using MEC;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -44,28 +46,29 @@ namespace Argali.Game.CardSystem
 		#endregion
 
 		#region 构造
-		public CardSystemRoundController(CardSystemInRoundData inRoundData,System.Action onfinish = null):this(onfinish)
+		private CardSystemRoundController(CardSystemInRoundData inRoundData):this()
 		{
 			InRoundData = inRoundData;
 		}
-		public CardSystemRoundController(System.Action onfinish = null) 
+		private CardSystemRoundController() 
 		{
 			InRoundData = new CardSystemInRoundData(CardSystemController.Instance.SystemInGameData.GetCurrentDropCount());
 			CardItemController = new InRoundCardItemController();
-			CardItemSpawner = new InRoundCardItemSpawner();
-			_onInitFinish = onfinish;
-			Timing.RunCoroutine(CheckInit());
 		}
-		#endregion
+
 		/// <summary>
-		/// 检查是否初始化完成
+		/// 创建回合控制器
 		/// </summary>
 		/// <returns></returns>
-		private IEnumerator<float> CheckInit()
+		public static async UniTask<CardSystemRoundController> Create()
 		{
-			yield return Timing.WaitUntilTrue(() => { return CardItemSpawner.IsReady; });
-			_onInitFinish?.Invoke();
+			CardSystemRoundController intance = new CardSystemRoundController();
+			intance.CardItemSpawner = await InRoundCardItemSpawner.Create();
+			return intance;
 		}
+		#endregion
+
+
 		/// <summary>
 		/// 开始回合
 		/// </summary>

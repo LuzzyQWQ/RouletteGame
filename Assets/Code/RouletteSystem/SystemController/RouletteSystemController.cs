@@ -31,10 +31,10 @@ namespace Argali.Game.RouletteSystem
 		/// <summary>
 		/// 初始化系统，每次开始一局游戏时，进行初始化。
 		/// </summary>
+		/// <param name="rouletteName"></param>
+		/// <param name="modeInfo"></param>
 		public void InitSystem(string rouletteName, RouletteSystemModeInfo modeInfo)
 		{
-			// 初始化loader
-
 			// 初始化局内数据
 			InGameData = new RouletteSystemInGameData();
 			// 给一个新的 转盘类

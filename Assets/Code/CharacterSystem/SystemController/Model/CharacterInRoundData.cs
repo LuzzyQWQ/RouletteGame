@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace Argali.Game.CharacterSystem
 	/// <summary>
 	/// 角色在单回合的数据
 	/// </summary>
-	public class CharacterInRoundData 
+	public class CharacterInRoundData
 	{
 		#region 战斗相关
 		/// <summary>
@@ -35,6 +36,17 @@ namespace Argali.Game.CharacterSystem
 		public CharacterInRoundData(CharacterInGameData data)
 		{
 			Attack = data.BaseAttack;
+			CurrentIndex = data.CurrentIndex;
+			CurrentForward = data.CurrentForward;
+		}
+		
+		/// <summary>
+		/// 拷贝数据
+		/// </summary>
+		/// <param name="data"></param>
+		public CharacterInRoundData(CharacterInRoundData data)
+		{
+			Attack = data.Attack;
 			CurrentIndex = data.CurrentIndex;
 			CurrentForward = data.CurrentForward;
 		}

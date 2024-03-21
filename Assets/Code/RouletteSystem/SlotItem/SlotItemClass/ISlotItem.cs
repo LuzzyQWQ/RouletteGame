@@ -24,6 +24,6 @@ namespace Argali.Game.RouletteSystem
 		/// <summary>
 		/// 触发能力
 		/// </summary>
-		public void Trigger(ref CharacterInRoundData characterInRoundData);
+		public CharacterInRoundData Trigger(CharacterInRoundData characterInRoundData);
 	}
 }

@@ -10,7 +10,7 @@ namespace Argali.Game.CharacterSystem
 		public void Execute(ref CharacterInRoundData characterData)
 		{
 			var roulette = RouletteSystemController.Instance.Roulette;
-			roulette.GetSlot(characterData.CurrentIndex).Trigger(ref characterData, SlotItemTriggerType.Stay);
+			characterData = roulette.GetSlot(characterData.CurrentIndex).Trigger(characterData, SlotItemTriggerType.Stay);
 		}
 	}
 }

@@ -47,15 +47,17 @@ namespace Argali.Game.RouletteSystem
 			_onSlotItemRemove?.Invoke(slotItem);
 		}
 
-		public virtual void Trigger(ref CharacterInRoundData characterInRoundData,SlotItemTriggerType triggerType) 
+		public virtual CharacterInRoundData Trigger(CharacterInRoundData characterInRoundData,SlotItemTriggerType triggerType) 
 		{
+			var calculateData = characterInRoundData;
 			foreach (var slotitem in _slotItems)
 			{
 				if (slotitem.GetSlotItemData().TriggerType == triggerType)
 				{
-					slotitem.Trigger(ref characterInRoundData);
+					calculateData = slotitem.Trigger(calculateData);
 				}
 			}
+			return calculateData;
 		}
 		#endregion
 	}

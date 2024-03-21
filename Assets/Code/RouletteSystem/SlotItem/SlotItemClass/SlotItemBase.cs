@@ -45,7 +45,7 @@ namespace Argali.Game.RouletteSystem
 				_locateSlot.RemoveSlotItem(this);
 			}
 		}
-		public abstract void Trigger(ref CharacterInRoundData characterInRoundData);
+		public abstract CharacterInRoundData Trigger(CharacterInRoundData characterInRoundData);
 
 
 	}

@@ -13,7 +13,7 @@ namespace Argali.Game.CharacterSystem
 			int nextIndex = roulette.GetNextIndex(characterData.CurrentIndex,characterData.CurrentForward);
 			characterData.CurrentIndex = nextIndex;
 			// 触发下一个下标的事件
-			roulette.GetSlot(nextIndex).Trigger(ref characterData, SlotItemTriggerType.Enter);
+			characterData = roulette.GetSlot(nextIndex).Trigger(characterData, SlotItemTriggerType.Enter);
 		}
 	}
 }

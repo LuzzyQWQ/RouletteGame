@@ -20,7 +20,12 @@ namespace Argali.Game.RouletteSystem
 
 		public void RegisterSlotItem(ISlotItem slotItem);
 		public void RemoveSlotItem(ISlotItem slotItem);
-
-		public void Trigger(ref CharacterInRoundData characterData, SlotItemTriggerType triggerType);
+		
+		/// <summary>
+		/// 按照触发类型触发插槽物品，并对用户的属性进行修改
+		/// </summary>
+		/// <param name="characterData"></param>
+		/// <param name="triggerType"></param>
+		public CharacterInRoundData Trigger(CharacterInRoundData characterData, SlotItemTriggerType triggerType);
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using UnityEngine;
 
 namespace Argali.Game.CharacterSystem
@@ -16,6 +17,11 @@ namespace Argali.Game.CharacterSystem
 		/// 回合内数据
 		/// </summary>
 		public CharacterInRoundData RoundData;
+
+		/// <summary>
+		/// 角色移动指令执行器
+		/// </summary>
+		public MovementCommandExecuter Commander;
 		#endregion
 
 		#region 事件
@@ -32,11 +38,11 @@ namespace Argali.Game.CharacterSystem
 		/// <remarks>使用保存的数据</remarks>
 		/// <param name="loadData"></param>
 		/// <param name="onFinish"></param>
-		public CharacterSystemRoundController(CharacterInRoundData loadData, System.Action onFinish):this(onFinish)
+		public CharacterSystemRoundController(CharacterInRoundData loadData, System.Action onFinish) : this(onFinish)
 		{
 			RoundData = loadData;
 		}
-		
+
 		/// <summary>
 		/// 创建角色回合控制器
 		/// </summary>
@@ -44,8 +50,8 @@ namespace Argali.Game.CharacterSystem
 		public CharacterSystemRoundController(System.Action onFinish)
 		{
 			RoundData = new CharacterInRoundData(CharacterSystemController.Instance.InGameData);
+			Commander = new MovementCommandExecuter();
 			_onFinishLoad = onFinish;
-
 		}
 		#endregion
 
@@ -59,7 +65,7 @@ namespace Argali.Game.CharacterSystem
 		}
 
 		/// <summary>
-		/// 向前移动
+		/// 向前移动一格
 		/// </summary>
 		public void MoveForward()
 		{

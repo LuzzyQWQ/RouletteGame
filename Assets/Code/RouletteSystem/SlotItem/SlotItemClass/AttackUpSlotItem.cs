@@ -17,9 +17,11 @@ namespace Argali.Game.RouletteSystem
 		/// <summary>
 		/// 增加攻击力
 		/// </summary>
-		public override void Trigger(ref CharacterInRoundData characterInRoundData)
+		public override CharacterInRoundData Trigger(CharacterInRoundData characterInRoundData)
 		{
-			Debug.Log("攻击力增加了");
+			characterInRoundData.Attack += 10;
+			Debug.Log("攻击力增加了10");
+			return characterInRoundData;
 		}
 	}
 

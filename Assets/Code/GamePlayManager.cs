@@ -45,8 +45,7 @@ namespace Argali.Game
 			// 初始化角色系统
 			var loadCharacterSystem = UniTask.Create(async () =>
 			{
-				// TODO: 角色配置加载
-				await UniTask.Yield();
+				await CharacterSystemConfigLoader.Instance.LoadMode("base");
 				// 初始化角色系统
 				CharacterSystemController.Instance.InitSystem("normal");
 			});

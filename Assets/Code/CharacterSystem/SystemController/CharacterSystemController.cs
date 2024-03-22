@@ -36,7 +36,7 @@ namespace Argali.Game.CharacterSystem
 		public void InitSystem(string playerName)
 		{
 			// 初始化玩家角色数据
-			PlayerInGameData = new CharacterInGameData();
+			PlayerInGameData = CharacterSystemConfigLoader.Instance.GeneratePlayerData(playerName);
 		}
 
 		#endregion 

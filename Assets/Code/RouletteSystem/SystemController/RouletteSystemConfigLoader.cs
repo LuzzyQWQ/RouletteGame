@@ -1,4 +1,5 @@
-﻿using Argali.Module.DataBase.ConfigLoader;
+﻿using Argali.Game.CharacterSystem;
+using Argali.Module.DataBase.ConfigLoader;
 using Argali.Module.Singleton;
 using Cysharp.Threading.Tasks;
 using System.Collections;

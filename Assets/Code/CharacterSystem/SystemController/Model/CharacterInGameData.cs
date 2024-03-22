@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,13 +33,27 @@ namespace Argali.Game.CharacterSystem
 		#endregion
 
 
+		#region 构造函数
 		public CharacterInGameData()
 		{
-			CurrentIndex = 0;
-			CurrentForward = true;
-			BaseAttack = 5;
 		}
-
+		public CharacterInGameData(CharacterInGameData data)
+		{
+			CurrentForward = data.CurrentForward;
+			CurrentIndex = data.CurrentIndex;
+			BaseAttack = data.BaseAttack;
+		}
+		/// <summary>
+		/// 使用配置数据初始化
+		/// </summary>
+		/// <param name="data"></param>
+		public CharacterInGameData(CharacterConfigData data)
+		{
+			BaseAttack = data.InitAttack;
+			CurrentForward = true;
+			CurrentIndex = 0;
+		}
+		#endregion
 
 	}
 }

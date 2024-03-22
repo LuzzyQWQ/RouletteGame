@@ -53,6 +53,16 @@ namespace Argali.Game.CharacterSystem
 			CurrentForward = true;
 			CurrentIndex = 0;
 		}
+		/// <summary>
+		/// 使用回合数据初始化
+		/// </summary>
+		/// <param name="roundData"></param>
+		public CharacterInGameData(CharacterInRoundData roundData)
+		{
+			BaseAttack = roundData.BaseAttack;
+			CurrentForward = roundData.CurrentForward;
+			CurrentIndex = roundData.CurrentIndex;
+		}
 		#endregion
 
 	}

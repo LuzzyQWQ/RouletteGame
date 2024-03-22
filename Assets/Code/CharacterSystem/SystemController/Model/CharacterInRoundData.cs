@@ -15,6 +15,11 @@ namespace Argali.Game.CharacterSystem
 		/// 攻击力
 		/// </summary>
 		public float Attack;
+
+		/// <summary>
+		/// 基础攻击力
+		/// </summary>
+		public float BaseAttack;
 		#endregion
 
 		#region 移动相关

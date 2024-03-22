@@ -60,8 +60,14 @@ namespace Argali.Game.CharacterSystem
 			return instance;
 		}
 		#endregion
+		
+		/// <summary>
+		/// 开始回合
+		/// </summary>
+		public void StartRound()
+		{
 
-
+		}
 
 	}
 

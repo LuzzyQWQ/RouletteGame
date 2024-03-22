@@ -56,36 +56,42 @@ namespace Argali.Game
 				loadRouletteSystem,
 				loadCharacterSystem
 				);
+			
+			// 暂时进入回合选择界面
+			PopPanelManager.Instance.OpenPopPanel<RoundSelectPanel>();
+			
 			// 暂时直接开始回合
-			StartRound().Forget();
+			//StartRound().Forget();
 		}
 
-		/// <summary>
-		/// 弹出回合游戏界面， 开始游戏
-		/// </summary>
-		private void PopRoundPanelAndStart()
-		{
-			CardSystemController.Instance.CurrentRoundController.StartRound();
-			var panel = PopPanelManager.Instance.OpenPopPanel<InRoundCardSystemPopPanel>();
-			panel.Init(CardSystemController.Instance.CurrentRoundController);
-		}
+
 		
 		/// <summary>
 		/// 开始回合
 		/// </summary>
 		/// <returns></returns>
-		private async UniTaskVoid StartRound()
+		public async UniTaskVoid StartRound()
 		{
 			// 卡片系统 开始回合
 			await CardSystemController.Instance.CreateRound();
+			CardSystemController.Instance.CurrentRoundController.StartRound();
 
 			// 角色系统 开始回合
 			await CharacterSystemController.Instance.CreateRound();
+			CharacterSystemController.Instance.RoundController.StartRound();
 
 			// 最后加载面板
-			PopRoundPanelAndStart();
+			PopRoundPanel();
 		}
-
+		/// <summary>
+		/// 弹出回合游戏界面
+		/// </summary>
+		private void PopRoundPanel()
+		{
+			//CardSystemController.Instance.CurrentRoundController.StartRound();
+			var panel = PopPanelManager.Instance.OpenPopPanel<InRoundCardSystemPopPanel>();
+			panel.Init(CardSystemController.Instance.CurrentRoundController);
+		}
 
 	}
 

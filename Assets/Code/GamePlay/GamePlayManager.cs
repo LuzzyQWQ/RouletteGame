@@ -17,13 +17,24 @@ namespace Argali.Game
 	/// </summary>
 	public class GamePlayManager : Singleton<GamePlayManager>
 	{
+		#region 属性
 		
+		/// <summary>
+		/// 通用局内数据
+		/// </summary>
+		public GeneralInGameData GeneralInGameData { get; private set; }
+		#endregion
+
+
+
 		/// <summary>
 		/// 开始一局新游戏
 		/// </summary>
 		/// <remarks>加载所有前置系统</remarks>
 		public async void StartNewGame()
 		{
+			// 初始化回合数据
+			GeneralInGameData = GeneralInGameData.Create();
 			// 初始化卡片系统
 			var loadCardSystem = UniTask.Create(async () =>
 			{
@@ -56,7 +67,7 @@ namespace Argali.Game
 				loadRouletteSystem,
 				loadCharacterSystem
 				);
-			
+
 			// 暂时进入回合选择界面
 			PopPanelManager.Instance.OpenPopPanel<RoundSelectPanel>();
 			

@@ -10,20 +10,12 @@ namespace Argali.Game.CardSystem
 	public class CardSystemInGameData
 	{
 		#region 数据
-		/// <summary>
-		/// 随机种子
-		/// </summary>
-		public string SeedName;
 
 		/// <summary>
 		/// 模式信息
 		/// </summary>
 		public CardSystemModeInfo ModeInfo;
 
-		/// <summary>
-		/// 回合数
-		/// </summary>
-		public int RoundCount;
 
 		/// <summary>
 		/// 额外手牌数量
@@ -35,11 +27,6 @@ namespace Argali.Game.CardSystem
 		/// </summary>
 		public int ExtraDropCount;
 		#endregion
-
-		public int GetCurrentHashSeed()
-		{
-			return SeedName.ToLower().GetHashCode() + RoundCount;
-		}
 		
 		public int GetCurrentHandCount()
 		{
@@ -52,11 +39,9 @@ namespace Argali.Game.CardSystem
 		}
 
 
-		public CardSystemInGameData(CardSystemModeInfo modeInfo,string seed)
+		public CardSystemInGameData(CardSystemModeInfo modeInfo)
 		{
-			SeedName = seed;
 			ModeInfo = modeInfo;
-			RoundCount = 0;
 			ExtraHandCount = 0;
 			ExtraDropCount = 0;
 		}

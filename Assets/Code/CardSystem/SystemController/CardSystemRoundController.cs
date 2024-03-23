@@ -75,7 +75,7 @@ namespace Argali.Game.CardSystem
 		public void StartRound()
 		{
 			// 初始化卡组
-			_userDeck.Init(CardSystemController.Instance.SystemInGameData.GetCurrentHashSeed());
+			_userDeck.Init(GamePlayManager.Instance.GeneralInGameData.GetCurrentHashCode());
 
 		}
 

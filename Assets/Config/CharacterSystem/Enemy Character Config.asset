@@ -15,4 +15,4 @@ MonoBehaviour:
   data:
   - CharacterName: little_cat
     BaseData:
-      InitAttack: 1
+      InitAttack: 100

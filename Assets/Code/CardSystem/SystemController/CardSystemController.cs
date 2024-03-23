@@ -39,21 +39,13 @@ namespace Argali.Game.CardSystem
 		/// </summary>
 		public void InitSystem(CardSystemModeInfo config)
 		{
-			InitSystem(config, DateTime.UtcNow.ToString());
-		}
-		public void InitSystem(CardSystemModeInfo config, string seed)
-		{
-			InitSystemWithDeck(config.PreDefinedCardDeckName, config, seed);
-		}
-		public void InitSystemWithDeck(string deckName, CardSystemModeInfo config, string seed)
-		{
-			SystemInGameData = new CardSystemInGameData(config, seed);
-			// 生成用户卡组
-			UserCardDeck = new CardDeck(CardSystemConfigLoader.Instance.GetInitCardDeck(deckName));
+			InitSystemWithDeck(config.PreDefinedCardDeckName, config);
 		}
 		public void InitSystemWithDeck(string deckName, CardSystemModeInfo config)
 		{
-			InitSystemWithDeck(deckName,config, DateTime.UtcNow.ToString());
+			SystemInGameData = new CardSystemInGameData(config);
+			// 生成用户卡组
+			UserCardDeck = new CardDeck(CardSystemConfigLoader.Instance.GetInitCardDeck(deckName));
 		}
 
 		#endregion
@@ -66,7 +58,6 @@ namespace Argali.Game.CardSystem
 		/// </summary>
 		public async UniTask CreateRound()
 		{
-			SystemInGameData.RoundCount++;
 			CurrentRoundController = await CardSystemRoundController.Create();
 		}
 		/// <summary>

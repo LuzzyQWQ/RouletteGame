@@ -12,6 +12,7 @@ namespace Argali.Game.CharacterSystem
 	/// </summary>
 	public class CharacterSystemController :Singleton<CharacterSystemController> 
 	{
+
 		#region 属性
 		/// <summary>
 		/// 玩家角色局内属性
@@ -22,7 +23,7 @@ namespace Argali.Game.CharacterSystem
 
 		#region 子控制器
 		/// <summary>
-		/// 回合控制器
+		/// 角色回合控制器
 		/// </summary>
 		public CharacterSystemRoundController RoundController { get; private set; }
 

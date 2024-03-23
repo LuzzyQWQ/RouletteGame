@@ -28,9 +28,6 @@ namespace Argali.Game.CharacterSystem
 		#region 事件
 		#endregion
 
-		#region 事件
-		#endregion
-
 		#region  初始化
 		/// <summary>
 		/// 创建角色回合控制器
@@ -68,7 +65,10 @@ namespace Argali.Game.CharacterSystem
 		{
 
 		}
+		public void EndRound()
+		{
 
+		}
 	}
 
 }

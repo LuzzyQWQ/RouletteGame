@@ -1,4 +1,5 @@
 ﻿using Argali.Module.Singleton;
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,7 @@ namespace Argali.Game.RouletteSystem
 	/// <summary>
 	/// 转盘系统控制器
 	/// </summary>
-	public class RouletteSystemController : Singleton<RouletteSystemController> 
+	public class RouletteSystemController : Singleton<RouletteSystemController> , ISystemController
 	{
 		#region 属性
 		/// <summary>
@@ -23,9 +24,8 @@ namespace Argali.Game.RouletteSystem
 		/// </summary>
 		public RouletteSystemInGameData InGameData;
 
-		#endregion
 
-		#region 方法
+		#endregion
 
 		#region 初始化
 		/// <summary>
@@ -40,11 +40,27 @@ namespace Argali.Game.RouletteSystem
 			// 给一个新的 转盘类
 			Roulette = RouletteSystemConfigLoader.Instance.SpawnRoulette(rouletteName);
 		}
+
+
 		#endregion
 
+		#region ISystemController
+		public async UniTask CreateRound()
+		{
+			// 没有回合控制器
+			await UniTask.Yield();
+		}
+
+
+		public async UniTask LoadRound()
+		{
+			// TODO: 载入逻辑
+			await UniTask.Yield();
+		}
+		public void EndRound()
+		{
+		}
 		#endregion
-
-
 	}
 
 }

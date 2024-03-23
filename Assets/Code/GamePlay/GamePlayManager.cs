@@ -83,14 +83,12 @@ namespace Argali.Game
 		/// <returns></returns>
 		public async UniTaskVoid StartRound()
 		{
-			// 卡片系统 开始回合
-			await CardSystemController.Instance.CreateRound();
-			//CardSystemController.Instance.RoundController.StartRound();
-
-			// 角色系统 开始回合
-			await CharacterSystemController.Instance.CreateRound();
-			//CharacterSystemController.Instance.PlayerRoundController.StartRound();
-
+			// 执行各系统的创建回合方法
+			await UniTask.WhenAll(
+				CardSystemController.Instance.CreateRound(),
+				CharacterSystemController.Instance.CreateRound(),
+				RouletteSystemController.Instance.CreateRound()
+				);
 			// 最后加载面板
 			PopRoundPanel();
 		}
@@ -99,8 +97,9 @@ namespace Argali.Game
 		/// 尝试结束回合
 		/// </summary>
 		/// <returns></returns>
-		public async UniTaskVoid TryEndRound()
+		public void TryEndRound()
 		{
+			
 			bool success = false;
 			// 结算时逻辑
 			// 角色的攻击力大于敌人的攻击力
@@ -125,10 +124,9 @@ namespace Argali.Game
 				PopPanelManager.Instance.ClosePopPanel<RoundSelectPanel>();
 			}
 			// TODO: 需要抽象一个SystemController类出来
-			// TODO: 需要在EndRound之中，Dispose掉RoundController
-			// TODO: 需要提取一个RoundController 抽象类， 用于快速处理析构函数
 			CharacterSystemController.Instance.EndRound();
 			CardSystemController.Instance.EndRound();
+			RouletteSystemController.Instance.EndRound();
 		}
 		/// <summary>
 		/// 弹出回合游戏界面

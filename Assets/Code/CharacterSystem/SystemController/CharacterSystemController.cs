@@ -10,7 +10,7 @@ namespace Argali.Game.CharacterSystem
 	/// <summary>
 	/// 角色控制器
 	/// </summary>
-	public class CharacterSystemController :Singleton<CharacterSystemController> 
+	public class CharacterSystemController :Singleton<CharacterSystemController> , ISystemController
 	{
 
 		#region 属性
@@ -66,8 +66,9 @@ namespace Argali.Game.CharacterSystem
 		/// <summary>
 		/// 载入一个回合
 		/// </summary>
-		public void LoadRound()
+		public async UniTask LoadRound()
 		{
+			await UniTask.Yield();
 			throw new NotImplementedException();
 		}
 		/// <summary>

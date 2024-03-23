@@ -11,7 +11,7 @@ namespace Argali.Game.CardSystem
 	/// <summary>
 	/// 卡片系统控制器
 	/// </summary>
-	public class CardSystemController : Singleton<CardSystemController> 
+	public class CardSystemController : Singleton<CardSystemController> , ISystemController
 	{
 		#region 属性
 		/// <summary>
@@ -52,31 +52,21 @@ namespace Argali.Game.CardSystem
 
 
 		#region 回合相关方法
-		/// <summary>
-		/// 创建回合控制器
-		/// 需要初始化牌组
-		/// </summary>
 		public async UniTask CreateRound()
 		{
 			RoundController = await CardSystemRoundController.Create();
 		}
-		/// <summary>
-		/// 加载回合控制器
-		/// </summary>
-		public void LoadRound()
+		public async UniTask LoadRound()
 		{
-			// TODO
+			await UniTask.Yield();
 		}
 		
-		/// <summary>
-		/// 结束回合
-		/// </summary>
 		public void EndRound()
 		{
 			RoundController.Destroy();
 			RoundController = null;
 		}
-#endregion
+		#endregion
 
 		#endregion
 	}

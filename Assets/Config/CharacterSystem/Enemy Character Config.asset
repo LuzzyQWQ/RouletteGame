@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Enemy Character Config
   m_EditorClassIdentifier: 
   data:
-  - CharacterName: little_cat
+  - CharacterName: base_enemy
     BaseData:
       InitAttack: 100

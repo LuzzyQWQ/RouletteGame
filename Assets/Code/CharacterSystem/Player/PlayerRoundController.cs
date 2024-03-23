@@ -11,7 +11,7 @@ namespace Argali.Game.CharacterSystem
 	/// 角色系统 回合内控制器
 	/// </summary>
 	/// <remarks>用于角色在单回合内的逻辑控制</remarks>
-	public class CharacterSystemRoundController
+	public class PlayerRoundController
 	{
 		#region 数据
 		/// <summary>
@@ -35,12 +35,12 @@ namespace Argali.Game.CharacterSystem
 		/// <remarks>使用保存的数据</remarks>
 		/// <param name="loadData"></param>
 		/// <param name="onFinish"></param>
-		private CharacterSystemRoundController(CharacterInRoundData loadData) : this()
+		private PlayerRoundController(CharacterInRoundData loadData) : this()
 		{
 			PlayerRoundData = loadData;
 		}
 
-		private CharacterSystemRoundController()
+		private PlayerRoundController()
 		{
 			PlayerRoundData = new CharacterInRoundData(CharacterSystemController.Instance.PlayerInGameData);
 			Commander = new MovementCommandExecuter();
@@ -50,9 +50,9 @@ namespace Argali.Game.CharacterSystem
 		/// 创建角色回合控制器
 		/// </summary>
 		/// <param name="onFinish"></param>
-		public static async UniTask<CharacterSystemRoundController> Create()
+		public static async UniTask<PlayerRoundController> Create()
 		{
-			CharacterSystemRoundController instance = new CharacterSystemRoundController();
+			PlayerRoundController instance = new PlayerRoundController();
 			await UniTask.Yield();
 			return instance;
 		}
@@ -62,10 +62,6 @@ namespace Argali.Game.CharacterSystem
 		/// 开始回合
 		/// </summary>
 		public void StartRound()
-		{
-
-		}
-		public void EndRound()
 		{
 
 		}

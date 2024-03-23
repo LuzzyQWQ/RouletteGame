@@ -27,7 +27,7 @@ namespace Argali.Game.CardSystem
 		/// <summary>
 		/// 回合控制器
 		/// </summary>
-		public CardSystemRoundController CurrentRoundController { get; private set; }
+		public CardSystemRoundController RoundController { get; private set; }
 		#endregion
 
 
@@ -58,7 +58,7 @@ namespace Argali.Game.CardSystem
 		/// </summary>
 		public async UniTask CreateRound()
 		{
-			CurrentRoundController = await CardSystemRoundController.Create();
+			RoundController = await CardSystemRoundController.Create();
 		}
 		/// <summary>
 		/// 加载回合控制器
@@ -69,11 +69,12 @@ namespace Argali.Game.CardSystem
 		}
 		
 		/// <summary>
-		/// 结束回合，传入是否过关
+		/// 结束回合
 		/// </summary>
 		public void EndRound()
 		{
-
+			RoundController.CardItemSpawner.Destroy();
+			//RoundController = null;
 		}
 #endregion
 

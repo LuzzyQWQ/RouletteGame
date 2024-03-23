@@ -25,8 +25,12 @@ namespace Argali.Game.CharacterSystem
 		/// <summary>
 		/// 角色回合控制器
 		/// </summary>
-		public CharacterSystemRoundController RoundController { get; private set; }
-
+		public PlayerRoundController PlayerRoundController { get; private set; }
+		
+		/// <summary>
+		/// 敌人回合控制器
+		/// </summary>
+		public EnemyRoundController EnemyRoundController { get; private set; }
 		#endregion
 
 		#region 初始化
@@ -48,7 +52,15 @@ namespace Argali.Game.CharacterSystem
 		/// </summary>
 		public async UniTask CreateRound()
 		{
-			RoundController = await CharacterSystemRoundController.Create();
+			var playerTask = UniTask.Create(async () =>
+			{
+				PlayerRoundController = await PlayerRoundController.Create();
+			});
+			var enemyTask = UniTask.Create(async () =>
+			{
+				EnemyRoundController = await EnemyRoundController.Create("base_enemy");
+			});
+			await UniTask.WhenAll(playerTask, enemyTask);
 		}
 
 		/// <summary>
@@ -63,7 +75,9 @@ namespace Argali.Game.CharacterSystem
 		/// </summary>
 		public void EndRound()
 		{
-			throw new NotImplementedException();
+			// 清空回合控制器
+			//PlayerRoundController = null;
+			//EnemyRoundController = null;
 		}
 		#endregion
 	}

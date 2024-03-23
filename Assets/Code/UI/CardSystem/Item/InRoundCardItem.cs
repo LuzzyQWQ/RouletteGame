@@ -41,7 +41,7 @@ namespace Argali.Game.CardSystem.UI
 			Card = card;
 			_cardNameText.text = card.GetCardName();
 			_selectedArea.SetActive(false);
-			OnDropCountChange(CardSystemController.Instance.CurrentRoundController.InRoundData.RestDropCount);
+			OnDropCountChange(CardSystemController.Instance.RoundController.InRoundData.RestDropCount);
 		}
 
 		#region  卡片事件委托
@@ -72,7 +72,7 @@ namespace Argali.Game.CardSystem.UI
 		{
 			if (item == this)
 			{
-				CardSystemController.Instance.CurrentRoundController.UseCard(Card, args);
+				CardSystemController.Instance.RoundController.UseCard(Card, args);
 				Destroy(gameObject);
 			}
 		}
@@ -81,7 +81,7 @@ namespace Argali.Game.CardSystem.UI
 		{
 			if (item == this)
 			{
-				CardSystemController.Instance.CurrentRoundController.DropAndDrawCard(Card);
+				CardSystemController.Instance.RoundController.DropAndDrawCard(Card);
 				Destroy(gameObject);
 			}
 		}
@@ -112,7 +112,7 @@ namespace Argali.Game.CardSystem.UI
 			_cardItemController.OnSelectCardItem += OnSelect;
 			_cardItemController.OnUseCardItem += OnUse;
 			_cardItemController.OnDropCardItem += OnDrop;
-			CardSystemController.Instance.CurrentRoundController.OnRestDropCountChanged += OnDropCountChange;
+			CardSystemController.Instance.RoundController.OnRestDropCountChanged += OnDropCountChange;
 		}
 		private void OnDisable()
 		{
@@ -122,12 +122,12 @@ namespace Argali.Game.CardSystem.UI
 			_cardItemController.OnDropCardItem -= OnDrop;
 			if (CardSystemController.Instance != null)
 			{
-				CardSystemController.Instance.CurrentRoundController.OnRestDropCountChanged -= OnDropCountChange;
+				CardSystemController.Instance.RoundController.OnRestDropCountChanged -= OnDropCountChange;
 			}
 		}
 		private void InitElement()
 		{
-			_cardItemController = CardSystemController.Instance.CurrentRoundController.CardItemController;
+			_cardItemController = CardSystemController.Instance.RoundController.CardItemController;
 			_bg = transform.Find("CardBG").GetComponent<Image>();
 			_cardNameText = transform.Find("CardNameText").GetComponent<TMP_Text>();
 			_selectButton = transform.Find("SelectButton").GetComponent<Button>();

@@ -33,7 +33,7 @@ namespace Argali.Game
 		/// <remarks>加载所有前置系统</remarks>
 		public async void StartNewGame()
 		{
-			// 初始化回合数据
+			// 初始化单局数据
 			GeneralInGameData = GeneralInGameData.Create();
 			// 初始化卡片系统
 			var loadCardSystem = UniTask.Create(async () =>
@@ -85,23 +85,59 @@ namespace Argali.Game
 		{
 			// 卡片系统 开始回合
 			await CardSystemController.Instance.CreateRound();
-			CardSystemController.Instance.CurrentRoundController.StartRound();
+			//CardSystemController.Instance.RoundController.StartRound();
 
 			// 角色系统 开始回合
 			await CharacterSystemController.Instance.CreateRound();
-			CharacterSystemController.Instance.RoundController.StartRound();
+			//CharacterSystemController.Instance.PlayerRoundController.StartRound();
 
 			// 最后加载面板
 			PopRoundPanel();
+		}
+
+		/// <summary>
+		/// 尝试结束回合
+		/// </summary>
+		/// <returns></returns>
+		public async UniTaskVoid TryEndRound()
+		{
+			bool success = false;
+			// 结算时逻辑
+			// 角色的攻击力大于敌人的攻击力
+			success = CharacterSystemController.Instance.PlayerRoundController.PlayerRoundData.Attack >= CharacterSystemController.Instance.EnemyRoundController.EnemyRoundData.Attack;
+
+
+			if (success)
+			{
+				Debug.Log(string.Format("成功通过第 {0} 关",GeneralInGameData.CurrentRound));
+				// TODO: 成功通过结算后的逻辑
+				GeneralInGameData.CurrentRound++;
+
+				PopPanelManager.Instance.ClosePopPanel<InRoundCardSystemPopPanel>();
+			}
+			else
+			{
+				Debug.LogError(string.Format("第 {0} 关 通关失败", GeneralInGameData.CurrentRound));
+				// TODO: 失败后的逻辑
+
+				// 回到主界面
+				PopPanelManager.Instance.ClosePopPanel<InRoundCardSystemPopPanel>();
+				PopPanelManager.Instance.ClosePopPanel<RoundSelectPanel>();
+			}
+			// TODO: 需要抽象一个SystemController类出来
+			// TODO: 需要在EndRound之中，Dispose掉RoundController
+			// TODO: 需要提取一个RoundController 抽象类， 用于快速处理析构函数
+			CharacterSystemController.Instance.EndRound();
+			CardSystemController.Instance.EndRound();
 		}
 		/// <summary>
 		/// 弹出回合游戏界面
 		/// </summary>
 		private void PopRoundPanel()
 		{
-			//CardSystemController.Instance.CurrentRoundController.StartRound();
+			//CardSystemController.Instance.RoundController.StartRound();
 			var panel = PopPanelManager.Instance.OpenPopPanel<InRoundCardSystemPopPanel>();
-			panel.Init(CardSystemController.Instance.CurrentRoundController);
+			panel.Init(CardSystemController.Instance.RoundController).Forget();
 		}
 
 	}

@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace Argali.Game.CharacterSystem
 {
+	/// <summary>
+	/// 角色配置数据
+	/// </summary>
 	[Serializable]
 	public struct CharacterConfigData
 	{

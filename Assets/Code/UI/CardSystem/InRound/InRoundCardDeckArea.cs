@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Cysharp.Threading.Tasks;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -26,12 +27,11 @@ namespace Argali.Game.CardSystem.UI
 		/// 初始化
 		/// </summary>
 		/// <param name="finishCallBack"></param>
-		public void Init(System.Action finishCallBack=null)
+		public async UniTask Init()
 		{
-			CardSystemController.Instance.CurrentRoundController.CardItemSpawner.SetContainer(_handCardContainer);
-			finishCallBack?.Invoke();
+			await UniTask.Yield();
+			CardSystemController.Instance.RoundController.CardItemSpawner.SetContainer(_handCardContainer);
 		}
-
 
 		private void Awake()
 		{
@@ -45,7 +45,7 @@ namespace Argali.Game.CardSystem.UI
 			_finishRoundButton = transform.Find("ButtonArea/FinishRoundButton").GetComponent<Button>();
 			_finishRoundButton.onClick.AddListener(() =>
 			{
-				CardSystemController.Instance.CurrentRoundController.EndRound();
+				GamePlayManager.Instance.TryEndRound();
 			});
 		}
 	}

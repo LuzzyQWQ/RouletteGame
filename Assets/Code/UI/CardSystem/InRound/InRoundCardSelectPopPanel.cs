@@ -35,7 +35,7 @@ namespace Argali.Game.CardSystem.UI
 		
 		private void UseCard()
 		{
-			var cardItemController = CardSystemController.Instance.CurrentRoundController.CardItemController;
+			var cardItemController = CardSystemController.Instance.RoundController.CardItemController;
 			cardItemController.UseCurrentCard(_argsInputField.text);
 			PopPanelManager.Instance.ClosePopPanel<InRoundCardSelectPopPanel>();
 		}
@@ -57,7 +57,7 @@ namespace Argali.Game.CardSystem.UI
 			_closeButton.onClick.AddListener(() =>
 			{
 				PopPanelManager.Instance.ClosePopPanel<InRoundCardSelectPopPanel>();
-				CardSystemController.Instance.CurrentRoundController.CardItemController.UnSelect();
+				CardSystemController.Instance.RoundController.CardItemController.UnSelect();
 			});
 		}
 	}

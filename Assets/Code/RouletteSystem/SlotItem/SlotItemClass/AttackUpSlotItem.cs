@@ -22,6 +22,7 @@ namespace Argali.Game.RouletteSystem
 			int attackUpCount = 10;
 			characterInRoundData.Attack += attackUpCount;
 			Debug.Log(string.Format("触发第 {0} 格攻击增加物品，攻击力增加了{1}, 当前攻击力为 {2}",characterInRoundData.CurrentIndex,attackUpCount, characterInRoundData.Attack));
+			Debug.Log(string.Format("当前敌人攻击力 {0}",CharacterSystemController.Instance.EnemyRoundController.EnemyRoundData.Attack));
 			return characterInRoundData;
 		}
 	}

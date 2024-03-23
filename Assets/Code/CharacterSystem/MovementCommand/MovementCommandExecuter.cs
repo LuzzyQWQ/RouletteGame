@@ -71,7 +71,7 @@ namespace Argali.Game.CharacterSystem
 			CharacterInRoundData beforeData, afterData = new(data);
 			movementCommand.Execute(ref afterData);
 			// TODO: 更新数据
-			CharacterSystemController.Instance.RoundController.PlayerRoundData = afterData;
+			CharacterSystemController.Instance.PlayerRoundController.PlayerRoundData = afterData;
 			// 检查是否需要打断后续事件
 			bool isCancel = default;
 
@@ -93,7 +93,7 @@ namespace Argali.Game.CharacterSystem
 			{
 				// 检测是否有取消指令
 				// 某些指令会中断后续指令
-				isCancel = await CommandExecution(CharacterSystemController.Instance.RoundController.PlayerRoundData, command);
+				isCancel = await CommandExecution(CharacterSystemController.Instance.PlayerRoundController.PlayerRoundData, command);
 			}
 			if (isCancel)
 			{

@@ -38,7 +38,7 @@ namespace Argali.Game.CardSystem
 				}
 				commands.Add(MovementCommandFactory.CreateCommand(MovementCommandType.Stay));
 				// 执行移动指令
-				CharacterSystemController.Instance.RoundController.Commander.RunCommands(commands);
+				CharacterSystemController.Instance.PlayerRoundController.Commander.RunCommands(commands);
 			}
 		}
 		public override void ShowArgsPanel()

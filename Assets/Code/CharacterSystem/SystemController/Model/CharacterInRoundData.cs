@@ -34,6 +34,18 @@ namespace Argali.Game.CharacterSystem
 		public bool CurrentForward;
 		#endregion
 
+
+		/// <summary>
+		/// 直接通过CharacterInfo 创建回合数据
+		/// </summary>
+		/// <param name="info"></param>
+		public CharacterInRoundData(CharacterInfo info)
+		{
+			Attack = info.BaseData.InitAttack;
+			CurrentIndex = 0;
+			CurrentForward = true;
+		}
+
 		/// <summary>
 		/// 通过局内数据生成初始回合数据
 		/// </summary>

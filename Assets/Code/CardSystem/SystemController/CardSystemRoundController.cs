@@ -2,6 +2,7 @@
 using Argali.UI.Pop;
 using Cysharp.Threading.Tasks;
 using MEC;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -15,7 +16,7 @@ namespace Argali.Game.CardSystem
 	/// 卡片系统回合控制器
 	/// </summary>
 	/// <remarks>用于控制当前回合的卡组行为</remarks>
-	public class CardSystemRoundController
+	public class CardSystemRoundController 
 	{
 		#region 属性
 		/// <summary>
@@ -62,22 +63,14 @@ namespace Argali.Game.CardSystem
 		/// <returns></returns>
 		public static async UniTask<CardSystemRoundController> Create()
 		{
-			CardSystemRoundController intance = new CardSystemRoundController();
-			intance.CardItemSpawner = await InRoundCardItemSpawner.Create();
-			return intance;
+			CardSystemRoundController instance = new CardSystemRoundController();
+			instance.CardItemSpawner = await InRoundCardItemSpawner.Create();
+			instance._userDeck.Init(GamePlayManager.Instance.GeneralInGameData.GetCurrentHashCode());
+			return instance;
 		}
 		#endregion
 
 
-		/// <summary>
-		/// 开始回合
-		/// </summary>
-		public void StartRound()
-		{
-			// 初始化卡组
-			_userDeck.Init(GamePlayManager.Instance.GeneralInGameData.GetCurrentHashCode());
-
-		}
 
 
 
@@ -86,10 +79,7 @@ namespace Argali.Game.CardSystem
 		/// </summary>
 		public void EndRound()
 		{
-			// 清除资源引用
-			CardItemSpawner.Destroy();
-			// 暂时回到首页
-			PopPanelManager.Instance.ClosePopPanel<InRoundCardSystemPopPanel>();
+
 		}
 		
 		/// <summary>

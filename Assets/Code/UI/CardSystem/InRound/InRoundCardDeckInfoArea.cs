@@ -43,10 +43,10 @@ namespace Argali.Game.CardSystem.UI
 					CardSystemController.Instance.UserCardDeck.OnUsedCardsCountChange += UpdateUsedCount;
 					UpdateUsedCount(CardSystemController.Instance.UserCardDeck._usedCardsList.Count);
 				}
-				if (CardSystemController.Instance.CurrentRoundController != null)
+				if (CardSystemController.Instance.RoundController != null)
 				{
-					CardSystemController.Instance.CurrentRoundController.OnRestDropCountChanged += UpdateRestDropCount;
-					UpdateRestDropCount(CardSystemController.Instance.CurrentRoundController.InRoundData.RestDropCount);
+					CardSystemController.Instance.RoundController.OnRestDropCountChanged += UpdateRestDropCount;
+					UpdateRestDropCount(CardSystemController.Instance.RoundController.InRoundData.RestDropCount);
 				}
 			}
 		}
@@ -60,9 +60,9 @@ namespace Argali.Game.CardSystem.UI
 					CardSystemController.Instance.UserCardDeck.OnDrawCardsCountChange -= UpdateDrawCount;
 					CardSystemController.Instance.UserCardDeck.OnUsedCardsCountChange -= UpdateUsedCount;
 				}
-				if (CardSystemController.Instance.CurrentRoundController != null)
+				if (CardSystemController.Instance.RoundController != null)
 				{
-					CardSystemController.Instance.CurrentRoundController.OnRestDropCountChanged -= UpdateRestDropCount;
+					CardSystemController.Instance.RoundController.OnRestDropCountChanged -= UpdateRestDropCount;
 				}
 			}
 		}

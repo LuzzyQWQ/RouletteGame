@@ -76,8 +76,8 @@ namespace Argali.Game.CharacterSystem
 		public void EndRound()
 		{
 			// 清空回合控制器
-			//PlayerRoundController = null;
-			//EnemyRoundController = null;
+			PlayerRoundController = null;
+			EnemyRoundController = null;
 		}
 		#endregion
 	}

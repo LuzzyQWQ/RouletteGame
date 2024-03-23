@@ -19,7 +19,7 @@ namespace Argali.Game.CharacterSystem
 		/// <returns></returns>
 		private static float RoundFacter(int round)
 		{
-			return baseRoundFacter * round;
+			return round == 1 ? 1 : baseRoundFacter * (round - 1);
 		}
 
 		/// <summary>
@@ -31,7 +31,7 @@ namespace Argali.Game.CharacterSystem
 		public static CharacterInRoundData CreateEnemyRoundData(CharacterInfo enemyInfo,int round)
 		{
 			CharacterInRoundData enemyData = new CharacterInRoundData(enemyInfo);
-			enemyData.BaseAttack *= RoundFacter(round);
+			enemyData.Attack *= RoundFacter(round);
 			return enemyData;
 		}
 	}

@@ -69,18 +69,6 @@ namespace Argali.Game.CardSystem
 			return instance;
 		}
 		#endregion
-
-
-
-
-
-		/// <summary>
-		/// 结束回合
-		/// </summary>
-		public void EndRound()
-		{
-
-		}
 		
 		/// <summary>
 		/// 抽取初始的卡组
@@ -116,6 +104,13 @@ namespace Argali.Game.CardSystem
 			OnRestDropCountChanged?.Invoke(InRoundData.RestDropCount);
 			_userDeck.Drop(card);
 			_userDeck.Draw();
+		}
+
+		public void Destroy()
+		{
+			CardItemSpawner.Destroy();
+			CardItemSpawner = null;
+			CardItemController = null;
 		}
 	}
 

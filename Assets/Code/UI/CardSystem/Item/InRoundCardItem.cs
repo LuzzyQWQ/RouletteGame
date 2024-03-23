@@ -120,7 +120,7 @@ namespace Argali.Game.CardSystem.UI
 			_cardItemController.OnSelectCardItem -= OnSelect;
 			_cardItemController.OnUseCardItem -= OnUse;
 			_cardItemController.OnDropCardItem -= OnDrop;
-			if (CardSystemController.Instance != null)
+			if (CardSystemController.Instance != null && CardSystemController.Instance.RoundController!=null)
 			{
 				CardSystemController.Instance.RoundController.OnRestDropCountChanged -= OnDropCountChange;
 			}

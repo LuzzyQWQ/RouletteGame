@@ -73,8 +73,8 @@ namespace Argali.Game.CardSystem
 		/// </summary>
 		public void EndRound()
 		{
-			RoundController.CardItemSpawner.Destroy();
-			//RoundController = null;
+			RoundController.Destroy();
+			RoundController = null;
 		}
 #endregion
 

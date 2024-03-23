@@ -42,6 +42,7 @@ namespace Argali.Game.CharacterSystem
 		public CharacterInRoundData(CharacterInfo info)
 		{
 			Attack = info.BaseData.InitAttack;
+			BaseAttack = info.BaseData.InitAttack;
 			CurrentIndex = 0;
 			CurrentForward = true;
 		}
@@ -53,6 +54,7 @@ namespace Argali.Game.CharacterSystem
 		public CharacterInRoundData(CharacterInGameData data)
 		{
 			Attack = data.BaseAttack;
+			BaseAttack = data.BaseAttack;
 			CurrentIndex = data.CurrentIndex;
 			CurrentForward = data.CurrentForward;
 		}
@@ -64,6 +66,7 @@ namespace Argali.Game.CharacterSystem
 		public CharacterInRoundData(CharacterInRoundData data)
 		{
 			Attack = data.Attack;
+			BaseAttack = data.BaseAttack;
 			CurrentIndex = data.CurrentIndex;
 			CurrentForward = data.CurrentForward;
 		}

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: GameScene
+  m_EditorClassIdentifier: 
+  m_GroupName: GameScene
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 364ca57992e6ef343a446345ccad58cd
+  m_SerializeEntries:
+  - m_GUID: 8a3740886e3f95f40ba15c2101f43a5b
+    m_Address: SlotPrefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6009dec10a8468b4dbaefa3559f81d34
+    m_Address: RouletteObject
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 463f3533418862b48aafa593e19a1659, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 30583c025f75f6a489c51b0e5ba91813, type: 2}
+    - {fileID: 11400000, guid: da11ac01173ac79488f4d6596b0dacf1, type: 2}

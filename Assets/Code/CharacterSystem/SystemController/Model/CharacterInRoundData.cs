@@ -32,6 +32,11 @@ namespace Argali.Game.CharacterSystem
 		/// 当前朝向
 		/// </summary>
 		public bool CurrentForward;
+
+		/// <summary>
+		/// 当前圈数
+		/// </summary>
+		public int CurrentRoundCount;
 		#endregion
 
 
@@ -45,6 +50,7 @@ namespace Argali.Game.CharacterSystem
 			BaseAttack = info.BaseData.InitAttack;
 			CurrentIndex = 0;
 			CurrentForward = true;
+			CurrentRoundCount = 0;
 		}
 
 		/// <summary>
@@ -57,6 +63,7 @@ namespace Argali.Game.CharacterSystem
 			BaseAttack = data.BaseAttack;
 			CurrentIndex = data.CurrentIndex;
 			CurrentForward = data.CurrentForward;
+			CurrentRoundCount = 0;
 		}
 		
 		/// <summary>
@@ -69,6 +76,7 @@ namespace Argali.Game.CharacterSystem
 			BaseAttack = data.BaseAttack;
 			CurrentIndex = data.CurrentIndex;
 			CurrentForward = data.CurrentForward;
+			CurrentRoundCount = data.CurrentRoundCount;
 		}
 	}
 

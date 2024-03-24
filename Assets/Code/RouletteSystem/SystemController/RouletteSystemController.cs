@@ -1,8 +1,10 @@
-﻿using Argali.Module.Singleton;
+﻿using Argali.Game.GameScene;
+using Argali.Module.Singleton;
 using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 
 namespace Argali.Game.RouletteSystem
@@ -18,6 +20,11 @@ namespace Argali.Game.RouletteSystem
 		/// 转盘
 		/// </summary>
 		public RouletteBase Roulette;
+
+		/// <summary>
+		/// 转盘物体
+		/// </summary>
+		public RouletteObject RouletteObject;
 
 		/// <summary>
 		/// 轮盘系统局内数据
@@ -39,6 +46,12 @@ namespace Argali.Game.RouletteSystem
 			InGameData = new RouletteSystemInGameData();
 			// 给一个新的 转盘类
 			Roulette = RouletteSystemConfigLoader.Instance.SpawnRoulette(rouletteName);
+			UniTask.Create(async () =>
+			{
+				var roulettePrefab = await Addressables.LoadAssetAsync<GameObject>("RouletteObject");
+				RouletteObject = Instantiate(roulettePrefab).GetComponent<RouletteObject>();
+				await RouletteObject.CreateSlotObjects(Roulette);
+			}).Forget();
 		}
 
 
@@ -49,6 +62,7 @@ namespace Argali.Game.RouletteSystem
 		{
 			// 没有回合控制器
 			await UniTask.Yield();
+
 		}
 
 

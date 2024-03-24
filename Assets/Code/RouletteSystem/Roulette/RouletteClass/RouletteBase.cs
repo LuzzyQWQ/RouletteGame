@@ -85,10 +85,21 @@ namespace Argali.Game.RouletteSystem
 		/// </summary>
 		/// <param name="currentindex"></param>
 		/// <param name="isForward"></param>
+		/// <param name="roundCountChange">圈数改变数量</param>
 		/// <returns></returns>
-		public int GetNextIndex(int currentindex, bool isForward)
+		public int GetNextIndex(int currentindex, bool isForward,out int roundCountChange)
 		{
-			return isForward ? (currentindex + 1) % SlotCount : (currentindex - 1 + SlotCount) % SlotCount;
+			roundCountChange = 0;
+			int nextIndex = isForward ? (currentindex + 1) % SlotCount : (currentindex - 1 + SlotCount) % SlotCount;
+			if(isForward && nextIndex == 0)
+			{
+				roundCountChange = 1;
+			}
+			if(!isForward && nextIndex == SlotCount - 1)
+			{
+				roundCountChange = -1;
+			}
+			return nextIndex;
 		}
 		/// <summary>
 		/// 获得转盘的数据
@@ -97,6 +108,21 @@ namespace Argali.Game.RouletteSystem
 		public RouletteData GetRouletteData()
 		{
 			return RouletteSystemConfigLoader.Instance.RouletteLoader.GetInfo(_rouletteName).RouletteData;
+		}
+		
+		/// <summary>
+		/// 计算旋转步数
+		/// </summary>
+		/// <param name="beforeIndex"></param>
+		/// <param name="afterIndex"></param>
+		/// <param name="beforeRound"></param>
+		/// <param name="afterRound"></param>
+		/// <returns></returns>
+		public int CalculateStep(int beforeIndex, int afterIndex,int beforeRound,int afterRound)
+		{
+			int step = (afterRound - beforeRound) * SlotCount +afterIndex -beforeIndex;
+			Debug.LogWarning(string.Format("移动步数为 {0}",step.ToString()));
+			return step;
 		}
 
 		#endregion

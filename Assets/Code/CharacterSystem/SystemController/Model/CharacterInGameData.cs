@@ -21,6 +21,11 @@ namespace Argali.Game.CharacterSystem
 		/// 当前所在插槽下标
 		/// </summary>
 		public int CurrentIndex;
+
+		/// <summary>
+		/// 总计圈数
+		/// </summary>
+		public int TotalRound;
 		#endregion
 
 

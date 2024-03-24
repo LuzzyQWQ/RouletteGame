@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using Argali.Game.RouletteSystem;
+using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -68,7 +69,8 @@ namespace Argali.Game.CharacterSystem
 		/// <returns></returns>
 		private async UniTask<bool> CommandExecution(CharacterInRoundData data, IMovementCommand movementCommand)
 		{
-			CharacterInRoundData beforeData, afterData = new(data);
+			CharacterInRoundData beforeData = data;
+			CharacterInRoundData afterData = new(data);
 			movementCommand.Execute(ref afterData);
 			// TODO: 更新数据
 			CharacterSystemController.Instance.PlayerRoundController.PlayerRoundData = afterData;
@@ -76,7 +78,9 @@ namespace Argali.Game.CharacterSystem
 			bool isCancel = default;
 
 			// TODO: 执行动效等
-			await UniTask.Yield();
+			int step = RouletteSystemController.Instance.Roulette.CalculateStep(beforeData.CurrentIndex,afterData.CurrentIndex,beforeData.CurrentRoundCount,afterData.CurrentRoundCount);
+			await RouletteSystemController.Instance.RouletteObject.Move(step);
+			//await UniTask.Yield();
 			return isCancel;
 		}
 		/// <summary>
